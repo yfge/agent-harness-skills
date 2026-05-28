@@ -9,18 +9,27 @@ This reference keeps shared vocabulary out of individual skills. Use it when a s
 - Contract: a rule that can be checked by script or review, usually with diff and audit modes.
 - Validation surface: the commands that prove a change is safe enough for review.
 - Runtime evidence: artifacts that connect observed behavior to logs, traces, external dependencies, or other runtime signals.
-- Ledger: a durable record of agent intent, changes, validation, risks, and linked commits.
+- Work-state surface: the current tasks, statuses, acceptance criteria, and task-to-change traceability.
+- Ledger: a durable delivery-evidence record of agent intent, changes, validation, risks, and linked tasks or commits.
 - Quality garden: a small set of generated metrics and baselines used to freeze new degradation and reduce old debt.
 
-## Neutral Artifact Names
+## Recommended Defaults
+
+These names are lightweight repo-local defaults, not required forms. If a project already has a reliable Jira, Linear, GitHub Issues, internal board, or equivalent system, treat that system as the work-state source of truth.
 
 - `AGENTS.md` for agent entrypoint rules.
 - `docs/design/` for longer design decisions.
 - `docs/exec-plans/` for multi-step implementation plans.
-- `tasks.md` or `docs/tasks.md` for current work state.
+- `tasks.md` or `docs/tasks.md` for current work state, acceptance criteria, and task-to-change traceability when no reliable external tracker exists.
 - `artifacts/runs/<run_id>/` for runtime evidence bundles.
-- `agent_chats/` or `agents_chat/` for collaboration ledgers.
+- `agent_chats/` or `agents_chat/` for delivery ledgers that summarize evidence; they may reference tasks and commits but do not replace task state.
 - `scripts/check_*` or `scripts/doctor*` for local repository checks.
+
+## Task And Commit Coupling
+
+- When a change completes, changes, or invalidates a tracked task, stage the task-state update in the same logical commit as that change.
+- This does not mean every commit needs a task entry; use the repository's task policy for small maintenance work.
+- If an external tracker is authoritative, update that tracker and reference the task ID from the commit or review record; mirror to `tasks.md` only when the repository explicitly wants a repo-local surface.
 
 ## Pattern Shape Matrix
 
@@ -31,7 +40,7 @@ These shapes are distilled from private authoring inputs. Do not name or copy so
 | Comprehensive harness | root entrypoint, architecture docs, validation scripts, runtime artifacts, ledgers, quality reports, CI gates | Add only the missing layer; avoid re-scaffolding the whole repo. |
 | Incremental harness | docs split by decisions, runbooks, quality, generated reports, validation pipelines, baselines | Normalize indexes and commands before adding new layers. |
 | Thin bootstrap | root entrypoint, task board, basic docs, partial scripts or helper commands | Create the smallest discoverable artifact and link it from the entrypoint. |
-| Delivery-ledger app | collaboration ledger, release/package notes, commit hooks, task state, user-facing documentation | Add enforceable delivery records before introducing heavier governance. |
+| Delivery-ledger app | collaboration ledger, release/package notes, commit hooks, task state, user-facing documentation | Couple task-state updates with the related commit before introducing heavier governance. |
 
 ## Source Material Policy
 

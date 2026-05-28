@@ -26,7 +26,7 @@ Use it when a project has grown beyond "read the README and run the tests" and n
 
 Coding agents can edit files quickly, but real repositories need more than fast edits. They need a stable operating surface.
 
-Without a harness, an agent has to infer too much: which document is authoritative, which directories are owned by which subsystem, which checks are meaningful, whether an observed failure maps to a runtime error, and what evidence belongs in a PR. That creates drift, repeated rediscovery, weak validation, and delivery summaries that cannot be audited.
+Without a harness, an agent has to infer too much: which document is authoritative, which directories are owned by which subsystem, which checks are meaningful, whether an observed failure maps to a runtime error, and what evidence belongs in a review or delivery record. That creates drift, repeated rediscovery, weak validation, and delivery summaries that cannot be audited.
 
 Agent Harness Skills turns those expectations into reusable repository practices. The goal is not to add ceremony. The goal is to make the important work discoverable, executable, and reviewable.
 
@@ -37,7 +37,8 @@ Agent Harness Skills turns those expectations into reusable repository practices
 - Choose the validation surface that actually proves a change.
 - Connect observed runtime behavior to logs, traces, request IDs, screenshots, and artifacts.
 - Separate code regressions from environment, external dependency, data, or quota blockers.
-- Leave concise delivery records through commits, PR notes, ledgers, and handoffs.
+- Keep task state and acceptance criteria tied to the change that fulfills them.
+- Leave concise delivery records through commits, review notes, ledgers, and handoffs.
 - Improve quality incrementally without turning every task into a broad refactor.
 
 ## Included Skills
@@ -49,10 +50,10 @@ The skills form a capability map for building and improving an agent-ready repos
 - `repo-contracts-and-boundaries`: turn architecture and directory boundaries into mechanical checks, baselines, and allowlists.
 - `validation-harness-design`: design repo validation entrypoints, test matrix, JSON/JUnit outputs, and CI gates.
 - `runtime-evidence-and-tracing`: design run IDs, request IDs, artifact bundles, runtime traces, and failure evidence.
-- `agent-ledger-and-delivery`: design collaboration ledgers and PR/delivery evidence summaries.
+- `agent-ledger-and-delivery`: design collaboration ledgers, delivery evidence summaries, and links between tasks, commits, and reviews.
 - `quality-gardening`: design quality snapshots, structural metrics, debt thresholds, and generated quality reports.
-- `design-doc-and-task-board`: coordinate design documents, `tasks.md`, exec plans, status updates, and acceptance criteria.
-- `atomic-commit-discipline`: split work into minimal commits, verify diffs, run scoped checks, and keep related evidence together.
+- `design-doc-and-task-board`: coordinate design documents, work-state surfaces such as `tasks.md`, exec plans, status updates, acceptance criteria, and task-to-change traceability.
+- `atomic-commit-discipline`: split work into minimal commits, include related task-state updates, verify diffs, run scoped checks, and keep related evidence together.
 
 ## When To Use
 
@@ -63,7 +64,8 @@ Use this repository when you want to:
 - Design `AGENTS.md` and related entrypoints so agents know where to start.
 - Add validation gates that are useful locally and reusable in CI.
 - Connect observed behavior, runtime signals, external dependency results, and logs into artifact bundles.
-- Create durable delivery records for PRs, commits, handoffs, and follow-up work.
+- Create durable delivery records for reviews, commits, handoffs, and follow-up work.
+- Use `tasks.md` or `docs/tasks.md` as a lightweight repo-local default when there is no reliable Jira, Linear, GitHub Issues, or internal board.
 
 It is especially useful when a repository already has product code, tests, and scripts, but agents still lose time rediscovering rules, guessing boundaries, or reporting work without enough evidence.
 
@@ -168,7 +170,7 @@ Use this repository when you want an agent to answer questions like:
 - "What harness pieces is this repo missing?"
 - "How should this project structure `AGENTS.md` and validation commands?"
 - "How do we connect observed behavior to request traces?"
-- "Should this requirement live in `tasks.md`, a design doc, or an exec plan?"
+- "Should this requirement live in a work-state surface such as `tasks.md`, a design doc, or an exec plan?"
 - "How should these changes be split into atomic commits?"
 
 ## Repository Layout

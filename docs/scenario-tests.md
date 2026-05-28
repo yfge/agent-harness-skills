@@ -29,3 +29,10 @@ Record realistic prompt tests for substantial skill wording changes. Keep entrie
 - Skills under review: all 9 repository skills plus shared and skill-local references.
 - Observed output: References should describe generic artifact roles, checks, and failure modes while excluding source project names, private paths, concrete URLs, and form-specific examples.
 - Follow-up: Add a neutrality checker, neutralize shared guidance, and add focused references for mirror policy, ledger coupling, setup bootstrap, runtime profiles, generated snapshots, schema contracts, and delivery artifacts.
+
+## 2026-05-28 - Commit-Coupled Task State
+
+- Prompt: "tasks.md should be a recommended engineering practice tied to commits, not a mandatory engineering form"
+- Skills under review: `design-doc-and-task-board`, `atomic-commit-discipline`, `agent-ledger-and-delivery`, and shared harness references.
+- Observed output: If a repo has no reliable task tracker, recommend `tasks.md` or `docs/tasks.md` as the repo-local work-state surface; when a tracked task is completed, changed, or invalidated, stage that task-state update with the same logical commit as the related change.
+- Follow-up: Keep external trackers valid as authoritative work-state systems, and keep ledgers as delivery evidence rather than task-status ownership.

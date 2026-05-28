@@ -1,12 +1,13 @@
 # Delivery Coupling
 
-Use this when ledger records must be tied to code review, commits, or handoff.
+Use this when ledger records must be tied to code review, tasks, commits, or handoff.
 
 ## Coupling Levels
 
 - Advisory: records are expected but not mechanically checked.
 - Commit-coupled: relevant changes must include a ledger record in the same commit.
-- Review-coupled: PR or review notes must link the ledger record.
+- Review-coupled: review notes must link the ledger record.
+- Task-linked: ledger records reference the task or work-state entry they summarize without owning its current status.
 - Gate-coupled: a hook or CI check blocks missing records for configured paths.
 
 ## Skip Policy
@@ -18,8 +19,9 @@ Use this when ledger records must be tied to code review, commits, or handoff.
 ## Validation
 
 - Check whether changed paths trigger a required record.
-- Confirm the ledger record names the prompt, goal, changes, validation, risks, and linked delivery artifacts.
-- Confirm PR notes and commit bodies do not claim validation that is absent from the record.
+- Confirm the ledger record names the prompt, goal, task reference, changes, validation, risks, and linked delivery artifacts.
+- Confirm review notes and commit bodies do not claim validation that is absent from the record.
+- Confirm task status is updated in the work-state surface, not only in the ledger.
 
 ## Do Not Include
 
