@@ -9,7 +9,7 @@ description: Use when designing agent_chats or agents_chat records, PR evidence,
 
 Define how agent work is recorded so reviewers can see prompt, intent, changes, validation, risks, and linked commits.
 
-This skill focuses on delivery evidence and long-term traceability, not commit splitting. For shared harness terms, see `../../references/harness-patterns.md`; when ledger files are absent, use `references/build-when-missing.md`.
+This skill focuses on delivery evidence and long-term traceability, not commit splitting. For shared harness terms, see `../../references/harness-patterns.md`; when ledger files are absent, use `references/build-when-missing.md`. For ledger coupling and skip policy, see `references/delivery-coupling.md`.
 
 ## When To Use
 

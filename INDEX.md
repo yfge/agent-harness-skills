@@ -19,7 +19,7 @@
 - Use `design-doc-and-task-board` when the user asks where requirements, design docs, `tasks.md`, or exec plans should live.
 - Use `repo-contracts-and-boundaries` when the user asks to protect architecture, layering, dependency direction, ownership, baselines, or allowlists.
 - Use `validation-harness-design` when the user asks for validation commands, doctor scripts, test matrices, CI gates, smoke checks, JSON, or JUnit outputs.
-- Use `runtime-evidence-and-tracing` when the user mentions browser/device evidence, request IDs, run IDs, logs, traces, screenshots, or runtime artifacts.
+- Use `runtime-evidence-and-tracing` when the user mentions runtime evidence, request IDs, run IDs, logs, traces, screenshots, external dependency evidence, or artifacts.
 - Use `agent-ledger-and-delivery` when the user asks for agent work records, PR evidence, delivery summaries, linked commits, validation notes, or handoff records.
 - Use `quality-gardening` when the user asks for quality snapshots, generated reports, structural metrics, debt thresholds, regression budgets, or cleanup loops.
 - Use `atomic-commit-discipline` when the user asks to commit, split changes, stage paths, or avoid unrelated work.

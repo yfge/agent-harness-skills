@@ -9,7 +9,7 @@ description: Use when designing quality snapshots, generated quality reports, st
 
 Track quality as concrete metrics and debt movement, not as a vague single score.
 
-This skill freezes new degradation first, then uses generated metrics to show current quality and convergence direction. For shared harness terms, see `../../references/harness-patterns.md`; when quality surfaces are absent, use `references/build-when-missing.md`.
+This skill freezes new degradation first, then uses generated metrics to show current quality and convergence direction. For shared harness terms, see `../../references/harness-patterns.md`; when quality surfaces are absent, use `references/build-when-missing.md`. For generated snapshot ownership, see `references/generated-snapshot-ownership.md`.
 
 ## When To Use
 

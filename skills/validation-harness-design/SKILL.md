@@ -9,19 +9,19 @@ description: Use when designing repository validation commands, doctor scripts, 
 
 Define the smallest repeatable command surface that proves repository changes are safe enough for review.
 
-This skill turns scattered checks into commands agents can run, CI can reuse, and failures can diagnose. For shared harness terms, see `../../references/harness-patterns.md`; when validation commands are absent, use `references/build-when-missing.md`.
+This skill turns scattered checks into commands agents can run, CI can reuse, and failures can diagnose. For shared harness terms, see `../../references/harness-patterns.md`; when validation commands are absent, use `references/build-when-missing.md`. For setup probes and CI-safe fallbacks, see `references/environment-bootstrap.md`.
 
 ## When To Use
 
 - The user wants `check_repo_harness.py`, `doctor.py`, a test matrix, or CI gates.
-- Existing validation commands are scattered and agents do not know what to run for docs-only, frontend, backend, or runtime changes.
+- Existing validation commands are scattered and agents do not know what to run for docs-only, interface, service, logic, or runtime changes.
 - JSON, JUnit, or artifact output is needed.
 
 ## Inputs Needed
 
-- Tech stack, main apps, existing test commands, and CI configuration.
+- Project shape, main surfaces, existing test commands, and CI configuration.
 - Change types and the minimum gate for each type.
-- Whether browser, device, Docker, provider, or external-service checks are needed.
+- Whether runtime, packaged-environment, external-dependency, or manual checks are needed.
 
 ## Execution Order
 
@@ -32,7 +32,7 @@ This skill turns scattered checks into commands agents can run, CI can reuse, an
 ## Step-by-Step Process
 
 1. Search `package.json`, Makefile, scripts, CI workflows, test directories, and docs.
-2. Split validation into repo/docs, contracts, unit/type/lint, and runtime/browser/device layers.
+2. Split validation into repo/docs, contracts, unit/type/lint, runtime, and external-dependency layers.
 3. If there is no shared validation entrypoint, bootstrap the minimum command surface from `references/build-when-missing.md`.
 4. For each change type, choose the minimum command and escalation condition.
 5. Design a unified entrypoint: `check_repo_harness` or `doctor` handles environment/structure, while focused commands test behavior.
@@ -74,10 +74,10 @@ This skill turns scattered checks into commands agents can run, CI can reuse, an
 - Requiring the heaviest end-to-end check for every change, which causes agents to skip validation.
 - Providing only a command list without a change-type matrix.
 - Emitting unstable JSON/JUnit output that cannot be aggregated later.
-- Omitting fallback records, then claiming a browser fallback was a full device or runtime test.
+- Omitting fallback records, then claiming a degraded path was full runtime validation.
 
 ## Example Prompts
 
 - "Design a check_repo_harness.py command surface for this repo."
-- "Design validation commands for docs-only, frontend, backend, and runtime changes."
+- "Design validation commands for docs-only, interface, service, logic, and runtime changes."
 - "Organize these tests into a CI gate and test matrix."

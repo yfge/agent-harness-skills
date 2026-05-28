@@ -9,7 +9,7 @@ description: Use when designing or refactoring AGENTS.md, CLAUDE.md, GEMINI.md, 
 
 Create a small, stable entrypoint that tells agents where truth lives, what rules apply, and which checks gate changes.
 
-The entrypoint should be navigation plus hard rules, not a long project encyclopedia. For shared harness terms, see `../../references/harness-patterns.md`; when entrypoint files are absent, use `references/build-when-missing.md`.
+The entrypoint should be navigation plus hard rules, not a long project encyclopedia. For shared harness terms, see `../../references/harness-patterns.md`; when entrypoint files are absent, use `references/build-when-missing.md`. For mirror casing and drift rules, see `references/mirror-policy.md`.
 
 ## When To Use
 

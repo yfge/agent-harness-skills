@@ -20,8 +20,8 @@ Use this skill to diagnose current harness maturity before proposing changes. Fo
 ## Inputs Needed
 
 - Repository root path.
-- User scope: whole repository, one app, docs-only work, runtime behavior, CI, or delivery flow.
-- Any reference repository or expected style the user names.
+- User scope: whole repository, one surface, docs-only work, runtime behavior, CI, or delivery flow.
+- Any expected harness shape or maturity target the user names.
 
 ## Execution Order
 
@@ -34,7 +34,7 @@ Use this skill to diagnose current harness maturity before proposing changes. Fo
 1. Use `rg --files` or `find` to list entrypoint files, docs, scripts, CI, and agent ledger locations.
 2. Read the nearest agent instruction file and decide whether it is a high-signal navigation entrypoint rather than a project encyclopedia.
 3. Search for `check_repo_harness`, `doctor`, `trace_run`, `quality`, `artifacts/runs`, `agent_chats`, and `tasks.md`.
-4. Check for a stable validation matrix: docs, contracts, unit/type/lint, browser/device/runtime, and CI.
+4. Check for a stable validation matrix: docs, contracts, unit/type/lint, runtime, external-dependency, and CI.
 5. Check whether failures can be traced through run IDs, request IDs, logs, screenshots, JSON/JUnit output, PRs, or commits.
 6. If a layer is absent, define the minimum bootstrap artifact from `references/build-when-missing.md` before recommending broader work.
 7. Compress gaps into no more than three next steps, ordered by value and risk.
@@ -80,7 +80,7 @@ Use this skill to diagnose current harness maturity before proposing changes. Fo
 
 - Reducing harness maturity to "there are tests."
 - Reading only README while ignoring scripts, CI, and real artifacts.
-- Copying environment variables, ports, accounts, or private workflow details from one product repository into another.
+- Copying environment variables, ports, accounts, or private workflow details from one implementation into another.
 - Producing a long wish list instead of a small, implementable improvement slice.
 
 ## Example Prompts

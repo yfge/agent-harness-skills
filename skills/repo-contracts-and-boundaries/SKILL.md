@@ -9,7 +9,7 @@ description: Use when turning architecture, layering, directory ownership, depen
 
 Convert architectural intent into checks that prevent new drift instead of relying on repeated prose warnings.
 
-This skill freezes new violations first and then supports gradual baseline reduction. For shared harness terms, see `../../references/harness-patterns.md`; when contract files are absent, use `references/build-when-missing.md`.
+This skill freezes new violations first and then supports gradual baseline reduction. For shared harness terms, see `../../references/harness-patterns.md`; when contract files are absent, use `references/build-when-missing.md`. For schema, fixture, and golden-payload contracts, see `references/schema-fixture-contracts.md`.
 
 ## When To Use
 
@@ -21,7 +21,7 @@ This skill freezes new violations first and then supports gradual baseline reduc
 
 - Architecture docs or expected layering.
 - Current directory structure and known historical debt.
-- Rules to protect: import direction, file size, API entrypoints, database access, UI boundaries, or similar constraints.
+- Rules to protect: dependency direction, file size, public entrypoints, data access, interface boundaries, or similar constraints.
 
 ## Execution Order
 

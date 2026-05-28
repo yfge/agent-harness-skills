@@ -22,3 +22,10 @@ Record realistic prompt tests for substantial skill wording changes. Keep entrie
 - Skills under review: all 9 repository skills plus per-skill references.
 - Observed output: The workflow should discover existing harness files, classify absence, build the minimum viable artifact from a skill-local reference, and validate the result.
 - Follow-up: Add `references/build-when-missing.md` for every skill and a closure checker that prevents skills from regressing to search-only guidance.
+
+## 2026-05-28 - Neutral Reference Distillation
+
+- Prompt: "references must distill source-repo practices without carrying project names or engineering-form assumptions"
+- Skills under review: all 9 repository skills plus shared and skill-local references.
+- Observed output: References should describe generic artifact roles, checks, and failure modes while excluding source project names, private paths, concrete URLs, and form-specific examples.
+- Follow-up: Add a neutrality checker, neutralize shared guidance, and add focused references for mirror policy, ledger coupling, setup bootstrap, runtime profiles, generated snapshots, schema contracts, and delivery artifacts.

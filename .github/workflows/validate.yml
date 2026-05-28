@@ -32,3 +32,6 @@ jobs:
 
       - name: Check skill closure
         run: python3 scripts/check_skill_closure.py
+
+      - name: Check reference neutrality
+        run: python3 scripts/check_reference_neutrality.py
