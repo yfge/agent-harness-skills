@@ -210,3 +210,7 @@ python3 scripts/check_reference_neutrality.py
 ```
 
 For substantial skill wording changes, record at least one realistic prompt and observed output in `docs/scenario-tests.md`.
+
+## License
+
+MIT License. See `LICENSE`.

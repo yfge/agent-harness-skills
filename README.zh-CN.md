@@ -210,3 +210,7 @@ python3 scripts/check_reference_neutrality.py
 ```
 
 对 substantial skill wording changes，至少在 `docs/scenario-tests.md` 记录一个 realistic prompt 和 observed output。`SKILL.md` 正文统一使用英文。
+
+## License
+
+MIT License. See `LICENSE`.

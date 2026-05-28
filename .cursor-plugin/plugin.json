@@ -6,6 +6,9 @@
   "author": {
     "name": "Agent Harness Skills contributors"
   },
+  "homepage": "https://github.com/yfge/agent-harness-skills",
+  "repository": "https://github.com/yfge/agent-harness-skills",
+  "license": "MIT",
   "keywords": [
     "skills",
     "agent-harness",
