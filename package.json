@@ -1,0 +1,7 @@
+{
+  "name": "agent-harness-skills",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reusable skills for building agent-ready repository harnesses.",
+  "main": ".opencode/plugins/agent-harness-skills.js"
+}
