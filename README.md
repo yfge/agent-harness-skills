@@ -4,6 +4,16 @@ Reusable skills for turning real software repositories into agent-ready engineer
 
 Agent Harness Skills helps teams build the repo-side control layer that coding agents need: clear entrypoints, explicit boundaries, runnable validation, runtime evidence, and reviewable delivery records.
 
+## Repository
+
+Canonical Git remote:
+
+```bash
+git@github.com:yfge/agent-harness-skills.git
+```
+
+Use this remote for git-backed installs and for publishing repository updates. A local clone path can still be used anywhere the installation examples accept `<repo-url-or-local-path>`.
+
 ## What It Is
 
 Agent Harness Skills is a reusable skill library for designing repository harnesses.
@@ -74,7 +84,7 @@ Use one of two patterns:
 - Packaged install: use the metadata files in this repo when the agent runtime supports plugins or extensions.
 - Skills-path install: point the agent runtime directly at this repository's `skills/` directory.
 
-In the examples below, replace `<repo-url-or-local-path>` with this repository's git URL or an absolute local path to the repository root.
+In the examples below, replace `<repo-url-or-local-path>` with this repository's git URL (`git@github.com:yfge/agent-harness-skills.git`) or an absolute local path to the repository root.
 
 ### Generic Skills Directory
 
@@ -115,7 +125,7 @@ This repository includes `gemini-extension.json` and `GEMINI.md`.
 Install the extension from a git URL or local path:
 
 ```bash
-gemini extensions install <repo-url-or-local-path>
+gemini extensions install git@github.com:yfge/agent-harness-skills.git
 ```
 
 Gemini loads `GEMINI.md`, which points it to `INDEX.md` for skill routing. Verify by asking Gemini which Agent Harness Skills are available.
@@ -136,7 +146,7 @@ For a git-backed install:
 
 ```json
 {
-  "plugin": ["agent-harness-skills@git+<repo-url>"]
+  "plugin": ["agent-harness-skills@git+ssh://git@github.com/yfge/agent-harness-skills.git"]
 }
 ```
 

@@ -19,7 +19,7 @@ For a git-backed install, use the repository URL:
 
 ```json
 {
-  "plugin": ["agent-harness-skills@git+<repo-url>"]
+  "plugin": ["agent-harness-skills@git+ssh://git@github.com/yfge/agent-harness-skills.git"]
 }
 ```
 

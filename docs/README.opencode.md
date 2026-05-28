@@ -20,7 +20,7 @@ Or use a git-backed plugin entry:
 
 ```json
 {
-  "plugin": ["agent-harness-skills@git+<repo-url>"]
+  "plugin": ["agent-harness-skills@git+ssh://git@github.com/yfge/agent-harness-skills.git"]
 }
 ```
 
