@@ -21,8 +21,11 @@
 ## 校验
 
 ```bash
+python3 -m unittest scripts/test_validate_skill_quality.py
 python3 scripts/validate_skill_quality.py
 ```
+
+对 substantial skill wording changes，至少在 `docs/scenario-tests.md` 记录一个 realistic prompt 和 observed output。
 
 ## 适用问题
 

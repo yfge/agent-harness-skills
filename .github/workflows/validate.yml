@@ -21,5 +21,8 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Run validator tests
+        run: python3 -m unittest scripts/test_validate_skill_quality.py
+
       - name: Validate skill quality
         run: python3 scripts/validate_skill_quality.py

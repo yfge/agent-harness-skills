@@ -19,6 +19,8 @@ Reusable skills for designing agent-first repository harnesses: entrypoints, rep
 ```text
 skills/
   <skill-name>/SKILL.md
+docs/
+  scenario-tests.md
 scripts/
   validate_skill_quality.py
 ```
@@ -26,8 +28,11 @@ scripts/
 ## Validation
 
 ```bash
+python3 -m unittest scripts/test_validate_skill_quality.py
 python3 scripts/validate_skill_quality.py
 ```
+
+For substantial skill wording changes, record at least one realistic prompt and observed output in `docs/scenario-tests.md`.
 
 ## Usage
 

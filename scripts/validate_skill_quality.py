@@ -15,6 +15,7 @@ import sys
 
 RE_KEBAB_CASE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 RE_XML_TAG = re.compile(r"[<>]")
+RE_HEADING = re.compile(r"^## (.+)$")
 
 MAX_DESCRIPTION_LEN = 1024
 MIN_DESCRIPTION_LEN = 80
@@ -69,6 +70,21 @@ def parse_frontmatter(path: Path, issues: Issues) -> dict[str, str] | None:
     return data
 
 
+def required_section_positions(text: str) -> dict[str, int]:
+    positions: dict[str, int] = {}
+    required = set(REQUIRED_SECTIONS)
+
+    for line_number, raw in enumerate(text.splitlines(), start=1):
+        match = RE_HEADING.fullmatch(raw.strip())
+        if not match:
+            continue
+        heading = match.group(1)
+        if heading in required and heading not in positions:
+            positions[heading] = line_number
+
+    return positions
+
+
 def validate_skill_dir(path: Path, issues: Issues) -> None:
     slug = path.name
     if not RE_KEBAB_CASE.fullmatch(slug):
@@ -105,10 +121,24 @@ def validate_skill_dir(path: Path, issues: Issues) -> None:
         issues.error(f"{skill_md}: description must not contain XML tags")
 
     text = skill_md.read_text(encoding="utf-8")
+    section_positions = required_section_positions(text)
     for section in REQUIRED_SECTIONS:
-        marker = f"## {section}"
-        if marker not in text:
-            issues.error(f"{skill_md}: missing required section '{marker}'")
+        if section not in section_positions:
+            issues.error(f"{skill_md}: missing required section '## {section}'")
+
+    ordered_positions = [
+        section_positions[section]
+        for section in REQUIRED_SECTIONS
+        if section in section_positions
+    ]
+    if (
+        len(ordered_positions) == len(REQUIRED_SECTIONS)
+        and ordered_positions != sorted(ordered_positions)
+    ):
+        issues.error(
+            f"{skill_md}: required sections must appear in order: "
+            + ", ".join(REQUIRED_SECTIONS)
+        )
 
     if "- First:" not in text or "- Then:" not in text or "- Finally:" not in text:
         issues.error(
