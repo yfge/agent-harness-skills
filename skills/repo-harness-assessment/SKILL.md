@@ -7,44 +7,44 @@ description: Use when evaluating an existing repository's agent-readiness, harne
 
 ## Overview
 
-English summary: assess how well a repository lets an agent understand rules, make safe changes, verify them, and produce reviewable evidence.
+Assess how well a repository lets an agent understand rules, make safe changes, verify them, and produce reviewable evidence.
 
-本 skill 用来先判断现状，不直接设计大改。目标是找出仓库的 agent/harness 缺口，并给出最小可落地补强切片。
+Use this skill to diagnose current harness maturity before proposing changes. For shared vocabulary and neutral artifact names, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户问“这个 repo 的 harness 缺什么”“为什么是 harness”“怎么补 agent 工程化”。
-- 需要对比多个 repo 的 agent 入口、验证命令、运行证据、交付记录。
-- 需要决定下一步补 `AGENTS.md`、验证脚本、artifact、ledger 还是质量门禁。
+- The user asks what harness pieces a repository is missing.
+- You need to compare entrypoints, validation commands, runtime evidence, delivery records, or quality gates across repositories.
+- You need to decide whether the next smallest improvement is an entrypoint, validation script, artifact bundle, ledger, contract check, or quality gate.
 
 ## Inputs Needed
 
-- 仓库根目录。
-- 用户关心的变化范围：全仓、某个 app、docs-only、runtime、CI、交付流程。
-- 已知参考项目或期望风格。
+- Repository root path.
+- User scope: whole repository, one app, docs-only work, runtime behavior, CI, or delivery flow.
+- Any reference repository or expected style the user names.
 
 ## Execution Order
 
-- First: 读取仓库入口和事实源，包括 `AGENTS.md`、README、architecture/reliability/docs index、CI 和 scripts。
-- Then: 查验证、证据、协作记录、任务/设计文档、提交规范是否已有机械入口。
-- Finally: 输出当前成熟度、缺口、最小补强方案和不要过早建设的内容。
+- First: Read repository entrypoints and source-of-truth files, including `AGENTS.md`, README, architecture/reliability docs, indexes, CI, and scripts.
+- Then: Check whether validation, evidence, collaboration records, task/design docs, and commit discipline have mechanical entrypoints.
+- Finally: Report maturity, gaps, the smallest useful improvement slice, and what not to build yet.
 
 ## Step-by-Step Process
 
-1. 用 `rg --files` 或 `find` 列出入口文件、docs、scripts、CI、agent ledger 目录。
-2. 读取最接近根目录的 agent 指令文件，确认它是否是目录型入口而不是长篇百科。
-3. 搜索 `check_repo_harness`、`doctor`、`trace_run`、`quality`、`artifacts/runs`、`agent_chats`、`tasks.md`。
-4. 判断仓库是否有稳定验证矩阵：docs、contracts、unit/type/lint、browser/device/runtime、CI。
-5. 判断失败证据是否可追溯：run id、request id、日志、截图、JSON/JUnit、PR/commit 记录。
-6. 把缺口压缩成最多 3 个下一步，按价值和风险排序。
+1. Use `rg --files` or `find` to list entrypoint files, docs, scripts, CI, and agent ledger locations.
+2. Read the nearest agent instruction file and decide whether it is a high-signal navigation entrypoint rather than a project encyclopedia.
+3. Search for `check_repo_harness`, `doctor`, `trace_run`, `quality`, `artifacts/runs`, `agent_chats`, and `tasks.md`.
+4. Check for a stable validation matrix: docs, contracts, unit/type/lint, browser/device/runtime, and CI.
+5. Check whether failures can be traced through run IDs, request IDs, logs, screenshots, JSON/JUnit output, PRs, or commits.
+6. Compress gaps into no more than three next steps, ordered by value and risk.
 
 ## Checks
 
-- 文件事实检查：入口文件是否存在，是否互相指向而不是互相复制漂移。
-- 结构检查：有没有明确 source of truth、目录边界、禁止新增漂移规则。
-- 验证检查：有没有一条本地最小命令和一条 CI 门禁命令。
-- evidence 检查：是否能从失败现象定位到日志、trace、截图或运行 artifact。
-- 过度建设检查：不要建议上来就做全量脚手架、平台化或跨环境自动发布。
+- File facts: entrypoint files exist and point to each other instead of duplicating drifting rules.
+- Structure: there is a clear source of truth, directory boundary model, and no-new-drift rule.
+- Validation: there is one local minimum command and one CI gate command.
+- Evidence: a failure can be connected to logs, traces, screenshots, or runtime artifacts.
+- Overbuild: do not recommend a full platform, broad scaffold, or cross-environment deployment system before the minimum slice is justified.
 
 ## Output Format
 
@@ -77,13 +77,13 @@ English summary: assess how well a repository lets an agent understand rules, ma
 
 ## Common Mistakes
 
-- 把 harness 简化成“有测试”。
-- 只看 README，不看 scripts、CI 和真实 artifact。
-- 把某个业务仓库的环境变量、端口、账号复制到另一个仓库。
-- 给出一长串愿望清单，而不是最小补强切片。
+- Reducing harness maturity to "there are tests."
+- Reading only README while ignoring scripts, CI, and real artifacts.
+- Copying environment variables, ports, accounts, or private workflow details from one product repository into another.
+- Producing a long wish list instead of a small, implementable improvement slice.
 
 ## Example Prompts
 
-- "检查这个 repo 的 harness 缺什么。"
-- "Compare this repository against ai-video-studio style run artifacts."
-- "这个项目现在 agent 能不能安全接手？"
+- "Assess what harness pieces this repository is missing."
+- "Compare this repository against a mature run-artifact pattern."
+- "Can an agent safely take over this project as it stands?"

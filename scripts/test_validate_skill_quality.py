@@ -29,7 +29,7 @@ description: Use when validating sample repository skills with concrete trigger 
 
 ## Overview
 
-Chinese-first overview.
+English overview.
 
 ## When To Use
 

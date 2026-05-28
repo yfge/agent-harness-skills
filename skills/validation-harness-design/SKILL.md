@@ -7,44 +7,44 @@ description: Use when designing repository validation commands, doctor scripts, 
 
 ## Overview
 
-English summary: define the smallest repeatable command surface that proves repository changes are safe enough for review.
+Define the smallest repeatable command surface that proves repository changes are safe enough for review.
 
-本 skill 负责把验证路径收口成 agent 能执行、CI 能复用、失败能诊断的命令集合。
+This skill turns scattered checks into commands agents can run, CI can reuse, and failures can diagnose. For shared harness terms, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户要新增 `check_repo_harness.py`、`doctor.py`、test matrix、CI gate。
-- 现有验证命令分散，agent 不知道 docs-only、frontend、backend、runtime 分别跑什么。
-- 需要 JSON/JUnit/artifact 输出。
+- The user wants `check_repo_harness.py`, `doctor.py`, a test matrix, or CI gates.
+- Existing validation commands are scattered and agents do not know what to run for docs-only, frontend, backend, or runtime changes.
+- JSON, JUnit, or artifact output is needed.
 
 ## Inputs Needed
 
-- 技术栈、主要 app、现有测试命令、CI 配置。
-- 哪些变更类型需要哪些最小 gate。
-- 是否需要浏览器、真机、Docker、provider 或外部服务。
+- Tech stack, main apps, existing test commands, and CI configuration.
+- Change types and the minimum gate for each type.
+- Whether browser, device, Docker, provider, or external-service checks are needed.
 
 ## Execution Order
 
-- First: 盘点现有命令和 CI，确认哪些已经可用。
-- Then: 设计分层验证矩阵和统一入口。
-- Finally: 输出命令表、报告格式、CI 接入和降级规则。
+- First: Inventory existing commands and CI to confirm what already works.
+- Then: Design a layered validation matrix and unified entrypoint.
+- Finally: Output the command table, report formats, CI wiring, and fallback rules.
 
 ## Step-by-Step Process
 
-1. 搜索 `package.json`、Makefile、scripts、CI workflow、测试目录和 docs。
-2. 把验证分成 repo/docs、contracts、unit/type/lint、runtime/browser/device。
-3. 为每类变更指定最小命令和升级条件。
-4. 设计统一入口：`check_repo_harness` 或 `doctor` 负责环境和结构；专项命令负责具体行为。
-5. 设计报告输出：stdout 给人读，JSON/JUnit 给 CI 和 artifact。
-6. 明确 skip/fallback 必须记录原因，不能把降级验证说成完整验证。
+1. Search `package.json`, Makefile, scripts, CI workflows, test directories, and docs.
+2. Split validation into repo/docs, contracts, unit/type/lint, and runtime/browser/device layers.
+3. For each change type, choose the minimum command and escalation condition.
+4. Design a unified entrypoint: `check_repo_harness` or `doctor` handles environment/structure, while focused commands test behavior.
+5. Design report output: stdout for humans, JSON/JUnit for CI and artifacts.
+6. Require skip/fallback reasons; do not describe degraded validation as full validation.
 
 ## Checks
 
-- 可运行检查：命令是否能在干净 checkout 或 documented setup 下执行。
-- 分层检查：docs-only 不应强制跑全量 runtime，runtime 改动不能只跑静态检查。
-- 输出检查：失败是否能定位到 case、path、command、artifact。
-- CI 检查：本地命令和 CI 逻辑是否一致。
-- 成本检查：最小 gate 是否足够快，重 gate 是否只在高风险变更触发。
+- Runnable: commands work in a clean checkout or documented setup.
+- Layered: docs-only work does not require heavy runtime checks, and runtime changes do not stop at static checks.
+- Output: failures identify case, path, command, and artifact.
+- CI: local commands and CI logic are consistent.
+- Cost: minimum gates are fast, and heavy gates trigger only on higher-risk changes.
 
 ## Output Format
 
@@ -70,13 +70,13 @@ English summary: define the smallest repeatable command surface that proves repo
 
 ## Common Mistakes
 
-- 把所有变更都要求跑最重 E2E，导致 agent 实际跳过。
-- 只有命令列表，没有变更类型矩阵。
-- JSON/JUnit 输出不是稳定 schema，后续无法聚合。
-- fallback 没记录，交付说明把 Playwright 当 Chrome DevTools。
+- Requiring the heaviest end-to-end check for every change, which causes agents to skip validation.
+- Providing only a command list without a change-type matrix.
+- Emitting unstable JSON/JUnit output that cannot be aggregated later.
+- Omitting fallback records, then claiming a browser fallback was a full device or runtime test.
 
 ## Example Prompts
 
-- "给这个 repo 设计 check_repo_harness.py。"
+- "Design a check_repo_harness.py command surface for this repo."
 - "Design validation commands for docs-only, frontend, backend, and runtime changes."
-- "把这些测试整理成 CI gate 和 test matrix。"
+- "Organize these tests into a CI gate and test matrix."

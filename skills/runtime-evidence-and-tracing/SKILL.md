@@ -7,44 +7,44 @@ description: Use when connecting browser, device, backend, logs, metrics, reques
 
 ## Overview
 
-English summary: make runtime validation auditable by tying user-visible behavior to backend evidence through stable IDs and artifacts.
+Make runtime validation auditable by tying user-visible behavior to backend evidence through stable IDs and artifacts.
 
-本 skill 负责运行态证据闭环。它要求 agent 不能只说“我测了”，而要能交出 run id、request id、日志、截图、网络或 trace。
+Agents should not only say they tested something; they should leave run IDs, request IDs, logs, screenshots, network records, or traces. For shared harness terms, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户提到浏览器验证、真机验证、request id、trace、logs、metrics、artifact。
-- 线上/测试环境问题需要从 UI 行为追到后端证据。
-- AI/provider/media/支付/通知等流程需要判定是业务失败、provider blocker 还是环境问题。
+- The user mentions browser validation, device validation, request IDs, traces, logs, metrics, or artifacts.
+- A production or test-environment issue must be traced from UI behavior to backend evidence.
+- AI, provider, media, payment, or notification flows need classification as code failure, provider blocker, environment issue, or data problem.
 
 ## Inputs Needed
 
-- 目标流程、入口 URL/API/device command。
-- 现有日志、请求封装、headers、observability endpoints。
-- artifact 存放目录和 run id 命名偏好。
+- Target flow, entry URL/API/device command.
+- Existing logging, request wrapper, headers, and observability endpoints.
+- Artifact directory and run ID naming preference.
 
 ## Execution Order
 
-- First: 找到请求入口和现有 request/log/trace 传播点。
-- Then: 设计 run id、request id、artifact bundle 和采集命令。
-- Finally: 输出证据契约和验证路径，明确 fallback 与 blocker 分类。
+- First: Find the request entrypoint and existing request/log/trace propagation points.
+- Then: Design run IDs, request IDs, artifact bundles, and collection commands.
+- Finally: Output the evidence contract and validation path, including fallback and blocker classification.
 
 ## Step-by-Step Process
 
-1. 搜索 frontend API wrapper、backend request middleware、logs、metrics、trace scripts。
-2. 确认 UI/client 是否能生成或透传 `X-Request-ID`、`X-Harness-Run-ID`。
-3. 设计 `artifacts/runs/<run_id>/` 结构：manifest、summary、logs、network、screenshots、trace。
-4. 为目标流程定义采集顺序：启动/登录/操作/等待/读取 artifact/归因。
-5. 定义 blocker 分类：code regression、environment unavailable、provider quota/billing、data missing、not evaluable。
-6. 输出如何在 PR 或 ledger 中引用 artifact，而不是提交大型临时文件。
+1. Search frontend API wrappers, backend request middleware, logs, metrics, and trace scripts.
+2. Confirm whether UI/client code can generate or propagate `X-Request-ID` and `X-Harness-Run-ID`.
+3. Design `artifacts/runs/<run_id>/` with manifest, summary, logs, network, screenshots, and trace files.
+4. Define the collection order for the target flow: start, authenticate if needed, operate, wait, read artifacts, and attribute the result.
+5. Define blocker categories: code regression, environment unavailable, provider quota/billing, data missing, and not evaluable.
+6. Explain how PRs or ledgers should reference artifacts without committing large temporary files.
 
 ## Checks
 
-- 传播检查：request id/run id 是否跨 frontend、backend、worker、provider call 保持可查。
-- artifact 检查：目录是否包含 manifest 和 summary，是否能复现命令。
-- 证据检查：截图、console、network、logs、metrics 是否覆盖失败边界。
-- 归因检查：provider/环境 blocker 不能写成质量失败。
-- 隐私检查：artifact 不应包含 token、手机号、真实密钥或敏感 payload。
+- Propagation: request ID and run ID remain searchable across frontend, backend, workers, and provider calls.
+- Artifact: the directory includes manifest, summary, and reproducible commands.
+- Evidence: screenshots, console, network, logs, and metrics cover the failure boundary.
+- Attribution: provider or environment blockers are not reported as product-quality failures.
+- Privacy: artifacts do not contain tokens, phone numbers, real secrets, or sensitive payloads.
 
 ## Output Format
 
@@ -73,13 +73,13 @@ English summary: make runtime validation auditable by tying user-visible behavio
 
 ## Common Mistakes
 
-- 只有截图，没有 request id 或 backend evidence。
-- trace 只在后端存在，浏览器错误无法带回同一条链。
-- 把 provider 余额/配额问题归为产品质量问题。
-- 提交大体积 artifact 到仓库，而不是引用路径和摘要。
+- Keeping only screenshots with no request ID or backend evidence.
+- Creating traces only on the backend, leaving browser errors disconnected.
+- Treating provider balance or quota issues as product-quality failures.
+- Committing large artifacts instead of referencing paths and summaries.
 
 ## Example Prompts
 
-- "把浏览器验证和后端 request id 串起来。"
+- "Connect browser validation to backend request IDs."
 - "Design artifacts/runs evidence for this AI generation workflow."
-- "这个失败应该怎么分类：代码、环境还是 provider blocker？"
+- "How should this failure be classified: code, environment, or provider blocker?"

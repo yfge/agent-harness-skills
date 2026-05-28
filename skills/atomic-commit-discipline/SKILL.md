@@ -7,45 +7,45 @@ description: Use when splitting changes into atomic commits, checking git status
 
 ## Overview
 
-English summary: turn completed work into small, reviewable commits with scoped validation and no unrelated files.
+Turn completed work into small, reviewable commits with scoped validation and no unrelated files.
 
-本 skill 负责做事后落库。它不是 PR 模板，也不是 ledger 模板；它专注于最小提交、精确 staged paths、验证和提交信息。
+This skill is not a PR template or ledger template. It focuses on minimal commits, exact staged paths, validation, and commit messages. For shared harness terms, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户说 commit、拆提交、stage exact paths、不要混入无关改动。
-- 工作区有多个变更，需要判断哪些属于同一逻辑提交。
-- 项目要求 Conventional Commits 或每个 commit 搭配 ledger。
+- The user asks to commit, split commits, stage exact paths, or avoid unrelated changes.
+- The worktree has multiple changes and you need to decide which belong in the same logical commit.
+- The project requires Conventional Commits or a ledger entry paired with each commit.
 
 ## Inputs Needed
 
-- 当前 `git status`、`git diff`、`git diff --cached`。
-- 本次用户目标和已完成验证。
-- 仓库提交规则和是否要求 ledger 同提交。
+- Current `git status`, `git diff`, and `git diff --cached`.
+- User goal and completed validation.
+- Repository commit rules and whether ledger entries must be committed together.
 
 ## Execution Order
 
-- First: 读取 `git status` 和相关 diff，识别自己改的文件与无关改动。
-- Then: 按一个逻辑行为一个提交拆分 staged paths，并运行最小必要验证。
-- Finally: 写 Conventional Commit 信息，提交后复查状态和提交内容。
+- First: Read `git status` and relevant diffs to identify your changes and unrelated changes.
+- Then: Split staged paths by one logical behavior per commit, and run the minimum relevant validation.
+- Finally: Write a Conventional Commit message, commit, and re-check status and commit contents.
 
 ## Step-by-Step Process
 
-1. 运行 `git status --short --branch`，列出所有 tracked/untracked 变化。
-2. 用 `git diff -- <path>` 阅读要提交的每个文件，不提交没读懂的变更。
-3. 按逻辑边界分组：docs、tests、implementation、harness、ledger 不要随意混合，除非同一规则要求同提交。
-4. 对每组运行最小相关验证；验证失败先修，不要提交“稍后再修”。
-5. 使用 `git add <exact paths>` 精确 staged，不用 `git add .` 除非确认全仓只有本次变更。
-6. 写 Conventional Commit subject，必要时 body 记录 validation、skip reason、linked artifact。
-7. 提交后运行 `git show --stat --oneline HEAD` 和 `git status --short` 复查。
+1. Run `git status --short --branch` and list all tracked and untracked changes.
+2. Read `git diff -- <path>` for every file you intend to commit; do not commit changes you do not understand.
+3. Group by logical boundary: docs, tests, implementation, harness, and ledger should not be mixed unless repository rules require the same commit.
+4. Run the smallest validation command that matches each group; fix failures before committing.
+5. Use `git add <exact paths>`; avoid `git add .` unless the whole worktree contains only this change.
+6. Write a Conventional Commit subject, and use the body for validation, skip reasons, or linked artifacts when needed.
+7. After committing, run `git show --stat --oneline HEAD` and `git status --short`.
 
 ## Checks
 
-- 范围检查：每个提交是否只有一个逻辑目的。
-- ownership 检查：是否误提交用户已有改动或生成临时文件。
-- 验证检查：提交前是否跑过和本组变更匹配的最小命令。
-- message 检查：subject 是否表达行为，而不是“update files”。
-- ledger 检查：如果仓库要求 agent_chats 同提交，是否同批 staged。
+- Scope: each commit has one logical purpose.
+- Ownership: no user-owned changes or temporary generated files are included by accident.
+- Validation: the commit has matching pre-commit validation.
+- Message: the subject describes behavior, not "update files."
+- Ledger: if the repository requires `agent_chats` in the same commit, it is staged with the change.
 
 ## Output Format
 
@@ -71,14 +71,14 @@ English summary: turn completed work into small, reviewable commits with scoped 
 
 ## Common Mistakes
 
-- 用 `git add .` 把无关文件带进去。
-- 一个提交同时改功能、格式、文档、重构和临时修复。
-- 没有读 diff 就提交。
-- 提交信息只写“fix”或“update”。
-- 验证失败仍然提交。
+- Using `git add .` and bringing unrelated files into the commit.
+- Mixing features, formatting, docs, refactors, and temporary fixes in one commit.
+- Committing before reading the diff.
+- Writing commit messages such as "fix" or "update."
+- Committing after validation fails.
 
 ## Example Prompts
 
-- "帮我把这批改动拆成原子提交。"
+- "Split these changes into atomic commits."
 - "Commit only the harness docs and leave unrelated files unstaged."
-- "检查 git status，按逻辑分组提交。"
+- "Check git status and commit by logical group."

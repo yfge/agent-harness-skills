@@ -8,3 +8,10 @@ Record realistic prompt tests for substantial skill wording changes. Keep entrie
 - Skills under review: all 9 repository skills plus `INDEX.md` routing.
 - Observed output: The review kept the current 9-skill model, found incomplete index routing, missing validator section-order enforcement, and no durable scenario-test record.
 - Follow-up: Add full routing notes, validator unit tests, section-order validation, CI test execution, and this scenario-test log.
+
+## 2026-05-28 - English Skill Body Conversion
+
+- Prompt: "commit, then make every SKILL.md English and add needed references and scripts"
+- Skills under review: all 9 repository skills plus supporting repository checks.
+- Observed output: The change should preserve the 9-skill model, convert skill bodies to English-only text, add a shared harness reference, and add a standard-library language check for `SKILL.md` files.
+- Follow-up: Run unit tests, structure validation, language validation, and diff whitespace checks before committing.

@@ -10,13 +10,14 @@ This repository contains reusable skills for building agent-first harnesses acro
 - Skill folder names and frontmatter `name` values must be lowercase kebab-case.
 - Frontmatter `description` must start with `Use when` and describe triggering conditions only.
 - Every skill must keep these sections in order: `Overview`, `When To Use`, `Inputs Needed`, `Execution Order`, `Step-by-Step Process`, `Checks`, `Output Format`, `Common Mistakes`, `Example Prompts`.
-- Use bilingual documentation: README files are split by language; skill bodies are Chinese-first with short English summaries and examples.
+- Use bilingual repository documentation where appropriate: README files are split by language, but every `SKILL.md` must be English-only.
 - Keep examples repo-neutral. Mention ai-shifu, ai-video-studio, elab, or TalkReplay only as pattern sources, not as required targets.
 - Do not add project-specific secrets, URLs, credentials, or private environment assumptions.
 
 ## Validation
 
 - Run `python3 scripts/validate_skill_quality.py` before committing.
+- Run `python3 scripts/check_skill_language.py` before committing skill wording changes.
 - For substantial wording changes, test the skill with at least one realistic prompt and record the observed output manually in the commit or PR notes.
 
 ## Commit Discipline

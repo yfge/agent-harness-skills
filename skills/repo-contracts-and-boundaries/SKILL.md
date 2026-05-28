@@ -7,44 +7,44 @@ description: Use when turning architecture, layering, directory ownership, depen
 
 ## Overview
 
-English summary: convert architectural intent into checks that prevent new drift instead of relying on repeated prose warnings.
+Convert architectural intent into checks that prevent new drift instead of relying on repeated prose warnings.
 
-本 skill 用来把“不要新增漂移”机械化。它不负责重构全部历史债务，而是先冻结新增问题，再逐步收敛 baseline。
+This skill freezes new violations first and then supports gradual baseline reduction. For shared harness terms, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户提到架构边界、目录边界、choke point、allowlist、baseline、contracts。
-- 仓库已有层级规则，但 agent 仍会新增旁路调用或错误依赖。
-- 需要区分 diff 模式和 audit 模式。
+- The user mentions architecture boundaries, directory ownership, choke points, allowlists, baselines, or contracts.
+- The repository has layering rules, but agents still add bypass calls or wrong dependencies.
+- You need to distinguish diff checks from full audit checks.
 
 ## Inputs Needed
 
-- 架构文档或期望分层。
-- 当前目录结构和历史债务位置。
-- 需要保护的规则：导入方向、文件大小、API 入口、DB 访问、UI 边界等。
+- Architecture docs or expected layering.
+- Current directory structure and known historical debt.
+- Rules to protect: import direction, file size, API entrypoints, database access, UI boundaries, or similar constraints.
 
 ## Execution Order
 
-- First: 读取架构文档和现有代码，找出真实边界与已知债务。
-- Then: 设计 diff 检查、audit 检查、baseline 和 allowlist。
-- Finally: 输出可执行 contract 规则和逐步收敛策略。
+- First: Read architecture docs and current code to identify real boundaries and known debt.
+- Then: Design diff checks, audit checks, baselines, and allowlists.
+- Finally: Output executable contract rules and a gradual convergence strategy.
 
 ## Step-by-Step Process
 
-1. 搜索 `ARCHITECTURE.md`、contracts docs、lint scripts、baseline/allowlist 文件。
-2. 列出应该保护的规则，每条规则必须能被脚本或评审检查。
-3. 区分新增漂移和历史债务：新增漂移应 fail，历史债务应进 baseline。
-4. 设计 `--mode diff` 检查 changed files，`--mode audit` 扫全仓并生成报告。
-5. 为每个 violation 输出 path、rule、why、suggested direction。
-6. 明确什么时候允许修改 allowlist，以及必须附带什么偿还说明。
+1. Search for `ARCHITECTURE.md`, contract docs, lint scripts, baseline files, and allowlists.
+2. List protected rules; each rule must be checkable by script or review.
+3. Separate new drift from historical debt: new drift should fail, historical debt should enter a baseline.
+4. Design `--mode diff` for changed files and `--mode audit` for full-repository reports.
+5. For each violation, output path, rule, reason, and suggested direction.
+6. Define when allowlists may change and what repayment note is required.
 
 ## Checks
 
-- 机械性检查：规则是否能通过 AST、regex、import graph、路径扫描或报告脚本验证。
-- baseline 检查：历史债务是否显式记录，是否避免“一次性清空”造成假绿。
-- diff 检查：新改动是否能被低成本拦截。
-- 例外检查：allowlist 是否有 owner、reason、收敛计划。
-- 过度建设检查：不要用复杂平台替代一个清晰脚本能解决的问题。
+- Mechanical: each rule can be checked by AST, regex, import graph, path scan, or report script.
+- Baseline: historical debt is explicit and not hidden by a fake green state.
+- Diff: new changes can be blocked cheaply.
+- Exception: allowlist entries have owner, reason, and convergence plan.
+- Overbuild: do not use a complex platform when a clear script is enough.
 
 ## Output Format
 
@@ -72,13 +72,13 @@ English summary: convert architectural intent into checks that prevent new drift
 
 ## Common Mistakes
 
-- 没有 baseline，导致历史债务让检查永远红。
-- 只有 audit 没有 diff，agent 仍能继续引入新漂移。
-- 错把架构建议当规则，规则却无法机械验证。
-- fail message 不告诉 agent 应该怎么改。
+- Skipping baselines, which makes checks permanently red because of historical debt.
+- Running audit only, which still lets agents introduce new drift.
+- Treating architecture advice as a rule when it cannot be mechanically checked.
+- Writing failure messages that do not tell an agent how to fix the violation.
 
 ## Example Prompts
 
-- "把这个项目的 architecture boundary 做成检查。"
+- "Turn this project's architecture boundaries into checks."
 - "Design a diff/audit contract checker for this repo."
-- "这些历史 choke point 怎么冻结新增依赖？"
+- "How should we freeze new dependencies on these historical choke points?"

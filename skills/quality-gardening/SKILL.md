@@ -7,44 +7,44 @@ description: Use when designing quality snapshots, generated quality reports, st
 
 ## Overview
 
-English summary: track quality as concrete metrics and debt movement, not as a vague single score.
+Track quality as concrete metrics and debt movement, not as a vague single score.
 
-本 skill 用来做质量治理：先冻结新增劣化，再用可生成的指标表达质量状态和收敛方向。
+This skill freezes new degradation first, then uses generated metrics to show current quality and convergence direction. For shared harness terms, see `../../references/harness-patterns.md`.
 
 ## When To Use
 
-- 用户提到 `QUALITY_SCORE.md`、quality report、质量快照、债务收敛、红线。
-- 仓库需要结构质量指标而不是只靠 lint/test。
-- 需要定期 garden，不想一次性大重构。
+- The user mentions `QUALITY_SCORE.md`, quality reports, quality snapshots, debt reduction, or red lines.
+- A repository needs structural metrics beyond lint and tests.
+- The team needs periodic gardening instead of a one-time large refactor.
 
 ## Inputs Needed
 
-- 当前质量痛点：大文件、散点事件、直接 API 调用、重复入口、缺测试等。
-- 可扫描的源码路径和应排除路径。
-- CI 或定期运行方式。
+- Current quality pain points: large files, scattered events, direct API calls, duplicated entrypoints, missing tests, or similar risks.
+- Source paths to scan and paths to exclude.
+- CI or scheduled run strategy.
 
 ## Execution Order
 
-- First: 找到现有质量文档、生成报告、lint 和 baseline。
-- Then: 选少量可追踪指标和阈值，不做虚假总分。
-- Finally: 输出质量报告结构、门禁策略和收敛节奏。
+- First: Find existing quality docs, generated reports, lint checks, and baselines.
+- Then: Choose a small set of trackable metrics and thresholds; do not create a fake aggregate score.
+- Finally: Output the quality report shape, gate policy, and convergence cadence.
 
 ## Step-by-Step Process
 
-1. 搜索 `QUALITY_SCORE.md`、quality scripts、baseline、CI gardening workflow。
-2. 选择 4 到 8 个指标，每个指标必须能自动采集。
-3. 区分 blocking gate 和 informational report。
-4. 为历史问题设置阈值或 baseline，新增劣化应 fail。
-5. 生成 Markdown 给人读，JSON 给脚本和趋势使用。
-6. 设计 garden 节奏：每次小幅降低阈值或关闭一个 allowlist。
+1. Search for `QUALITY_SCORE.md`, quality scripts, baselines, and CI gardening workflows.
+2. Choose four to eight metrics, and make each one automatically collectable.
+3. Separate blocking gates from informational reports.
+4. Use thresholds or baselines for historical problems; new degradation should fail.
+5. Generate Markdown for humans and JSON for scripts and trends.
+6. Design a gardening cadence: lower one threshold or close one allowlist item at a time.
 
 ## Checks
 
-- 指标检查：是否可重复生成，是否真的反映结构风险。
-- 阈值检查：是否冻结新增劣化，而不是要求一次性还清旧债。
-- 报告检查：是否列出 path、metric、current、threshold、suggested action。
-- CI 检查：哪些指标 fail build，哪些只生成报告。
-- 反激励检查：不要用单一分数掩盖关键风险。
+- Metrics: each metric is repeatable and reflects a real structural risk.
+- Thresholds: checks freeze new degradation instead of demanding immediate full cleanup.
+- Reports: each finding includes path, metric, current value, threshold, and suggested action.
+- CI: it is clear which metrics fail builds and which only report.
+- Incentives: do not hide critical risks behind one attractive total score.
 
 ## Output Format
 
@@ -70,13 +70,13 @@ English summary: track quality as concrete metrics and debt movement, not as a v
 
 ## Common Mistakes
 
-- 发明一个好看的总分，却无法指导修复。
-- 指标太多，没人看也没人修。
-- 没有 baseline，导致质量门禁从第一天就不可用。
-- 把一次性重构当成质量治理。
+- Inventing a good-looking total score that does not guide repairs.
+- Tracking too many metrics, so nobody reads or fixes them.
+- Skipping baselines, which makes the quality gate unusable on day one.
+- Treating one large refactor as quality governance.
 
 ## Example Prompts
 
-- "给这个 repo 设计 QUALITY_SCORE.md 和 quality-report。"
+- "Design QUALITY_SCORE.md and a quality report for this repo."
 - "How should we track structural debt without inventing a fake score?"
-- "把这些历史大文件和散点调用纳入 quality garden。"
+- "Add historical large files and scattered calls to a quality garden."
