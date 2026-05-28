@@ -9,7 +9,7 @@ description: Use when turning architecture, layering, directory ownership, depen
 
 Convert architectural intent into checks that prevent new drift instead of relying on repeated prose warnings.
 
-This skill freezes new violations first and then supports gradual baseline reduction. For shared harness terms, see `../../references/harness-patterns.md`.
+This skill freezes new violations first and then supports gradual baseline reduction. For shared harness terms, see `../../references/harness-patterns.md`; when contract files are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ This skill freezes new violations first and then supports gradual baseline reduc
 
 1. Search for `ARCHITECTURE.md`, contract docs, lint scripts, baseline files, and allowlists.
 2. List protected rules; each rule must be checkable by script or review.
-3. Separate new drift from historical debt: new drift should fail, historical debt should enter a baseline.
-4. Design `--mode diff` for changed files and `--mode audit` for full-repository reports.
-5. For each violation, output path, rule, reason, and suggested direction.
-6. Define when allowlists may change and what repayment note is required.
+3. If architecture or contract surfaces are missing, bootstrap the minimum files and checker shape from `references/build-when-missing.md`.
+4. Separate new drift from historical debt: new drift should fail, historical debt should enter a baseline.
+5. Design `--mode diff` for changed files and `--mode audit` for full-repository reports.
+6. For each violation, output path, rule, reason, and suggested direction.
+7. Define when allowlists may change and what repayment note is required.
 
 ## Checks
 

@@ -9,7 +9,7 @@ description: Use when deciding how requirements should be captured in design doc
 
 Decide where intent, design, execution tasks, and acceptance criteria should live so they do not drift.
 
-Design docs explain why and how; `tasks.md` tracks current work and state; exec plans describe how to execute a complex batch of changes. For shared harness terms, see `../../references/harness-patterns.md`.
+Design docs explain why and how; `tasks.md` tracks current work and state; exec plans describe how to execute a complex batch of changes. For shared harness terms, see `../../references/harness-patterns.md`; when planning files are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ Design docs explain why and how; `tasks.md` tracks current work and state; exec 
 
 1. Search for `tasks.md`, `PLANS.md`, `docs/design*`, `docs/exec-plans`, and README.
 2. Identify each file's actual responsibility; do not infer solely from names.
-3. Classify by complexity: small fixes update tasks only; architecture or cross-module changes start with a design doc; multi-day batches use an exec plan.
-4. Write task entries with owner, status, acceptance criteria, and linked paths; do not put chat notes into `tasks.md`.
-5. When design changes, update the design source of truth first, then sync task state and acceptance criteria.
-6. Output drift checks: one conclusion has one source of truth, and other files reference it.
+3. If no planning surface exists, bootstrap the minimum design/task/exec-plan set from `references/build-when-missing.md`.
+4. Classify by complexity: small fixes update tasks only; architecture or cross-module changes start with a design doc; multi-day batches use an exec plan.
+5. Write task entries with owner, status, acceptance criteria, and linked paths; do not put chat notes into `tasks.md`.
+6. When design changes, update the design source of truth first, then sync task state and acceptance criteria.
+7. Output drift checks: one conclusion has one source of truth, and other files reference it.
 
 ## Checks
 

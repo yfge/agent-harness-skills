@@ -9,7 +9,7 @@ description: Use when designing agent_chats or agents_chat records, PR evidence,
 
 Define how agent work is recorded so reviewers can see prompt, intent, changes, validation, risks, and linked commits.
 
-This skill focuses on delivery evidence and long-term traceability, not commit splitting. For shared harness terms, see `../../references/harness-patterns.md`.
+This skill focuses on delivery evidence and long-term traceability, not commit splitting. For shared harness terms, see `../../references/harness-patterns.md`; when ledger files are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ This skill focuses on delivery evidence and long-term traceability, not commit s
 
 1. Search for `agent_chats`, `agents_chat`, CI checks, AGENTS rules, and PR templates.
 2. Confirm record granularity: per commit, per PR, per session, or per milestone.
-3. Define filename, frontmatter, body sections, language, and redaction rules.
-4. Define when ledger updates are required, when skip is allowed, and how skip is recorded.
-5. Define how PR summaries reference commits, validation, artifacts, risks, and next steps.
-6. Keep ledger and atomic commit rules separate: this skill defines records; `atomic-commit-discipline` defines commit splitting.
+3. If no ledger convention exists, bootstrap the minimum directory and template from `references/build-when-missing.md`.
+4. Define filename, frontmatter, body sections, language, and redaction rules.
+5. Define when ledger updates are required, when skip is allowed, and how skip is recorded.
+6. Define how PR summaries reference commits, validation, artifacts, risks, and next steps.
+7. Keep ledger and atomic commit rules separate: this skill defines records; `atomic-commit-discipline` defines commit splitting.
 
 ## Checks
 

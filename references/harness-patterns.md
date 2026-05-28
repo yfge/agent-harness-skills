@@ -22,6 +22,20 @@ This reference keeps shared vocabulary out of individual skills. Use it when a s
 - `agent_chats/` or `agents_chat/` for collaboration ledgers.
 - `scripts/check_*` or `scripts/doctor*` for local repository checks.
 
+## Cross-Repo Pattern Matrix
+
+These names come from pattern sources only. Do not require a target repository to copy every file.
+
+| Shape | Pattern sources | Useful signals | Bootstrap bias |
+| --- | --- | --- | --- |
+| Full harness | ai-shifu, ai-video-studio | root entrypoint, architecture docs, validation scripts, runtime artifacts, ledgers, quality reports, CI gates | Add only the missing layer; avoid re-scaffolding the whole repo. |
+| Medium harness | elab | docs split by architecture/runbooks/quality, generated reports, validation pipelines, baselines | Normalize indexes and commands before adding new layers. |
+| Thin harness bootstrap | orion, elab-system | root entrypoint, task board, basic docs, partial scripts or deployment helpers | Create the smallest discoverable artifact and link it from the entrypoint. |
+
+## Missing-File Construction Rule
+
+If a skill asks an agent to search for a harness surface and that surface is absent, the agent must not stop at "missing." It must propose or create the minimum artifact described by the skill-local `references/build-when-missing.md`.
+
 ## Design Bias
 
 - Start with the smallest useful slice.

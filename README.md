@@ -24,6 +24,7 @@ docs/
 references/
   harness-patterns.md
 scripts/
+  check_skill_closure.py
   check_skill_language.py
   validate_skill_quality.py
 ```
@@ -34,6 +35,7 @@ scripts/
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
+python3 scripts/check_skill_closure.py
 ```
 
 For substantial skill wording changes, record at least one realistic prompt and observed output in `docs/scenario-tests.md`.

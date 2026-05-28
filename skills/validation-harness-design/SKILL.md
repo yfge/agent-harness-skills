@@ -9,7 +9,7 @@ description: Use when designing repository validation commands, doctor scripts, 
 
 Define the smallest repeatable command surface that proves repository changes are safe enough for review.
 
-This skill turns scattered checks into commands agents can run, CI can reuse, and failures can diagnose. For shared harness terms, see `../../references/harness-patterns.md`.
+This skill turns scattered checks into commands agents can run, CI can reuse, and failures can diagnose. For shared harness terms, see `../../references/harness-patterns.md`; when validation commands are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ This skill turns scattered checks into commands agents can run, CI can reuse, an
 
 1. Search `package.json`, Makefile, scripts, CI workflows, test directories, and docs.
 2. Split validation into repo/docs, contracts, unit/type/lint, and runtime/browser/device layers.
-3. For each change type, choose the minimum command and escalation condition.
-4. Design a unified entrypoint: `check_repo_harness` or `doctor` handles environment/structure, while focused commands test behavior.
-5. Design report output: stdout for humans, JSON/JUnit for CI and artifacts.
-6. Require skip/fallback reasons; do not describe degraded validation as full validation.
+3. If there is no shared validation entrypoint, bootstrap the minimum command surface from `references/build-when-missing.md`.
+4. For each change type, choose the minimum command and escalation condition.
+5. Design a unified entrypoint: `check_repo_harness` or `doctor` handles environment/structure, while focused commands test behavior.
+6. Design report output: stdout for humans, JSON/JUnit for CI and artifacts.
+7. Require skip/fallback reasons; do not describe degraded validation as full validation.
 
 ## Checks
 

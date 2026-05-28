@@ -9,7 +9,7 @@ description: Use when designing or refactoring AGENTS.md, CLAUDE.md, GEMINI.md, 
 
 Create a small, stable entrypoint that tells agents where truth lives, what rules apply, and which checks gate changes.
 
-The entrypoint should be navigation plus hard rules, not a long project encyclopedia. For shared harness terms, see `../../references/harness-patterns.md`.
+The entrypoint should be navigation plus hard rules, not a long project encyclopedia. For shared harness terms, see `../../references/harness-patterns.md`; when entrypoint files are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ The entrypoint should be navigation plus hard rules, not a long project encyclop
 
 1. Search for `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor`, and `.github/instructions`.
 2. Identify repeated rules, oversized rules, stale paths, or chat-only facts.
-3. Choose one primary entrypoint; other agent-specific files should mirror, symlink, or explicitly reference it.
-4. Keep the root entrypoint to scope, source-of-truth docs, do/avoid rules, commands, tests, and relevant skills.
-5. If a subtree has special rules, put a closer `AGENTS.md` in that subtree instead of overloading the root.
-6. Define drift prevention through a generation script, check script, CI job, or explicit manual checklist.
+3. If no usable entrypoint exists, create the minimum source-of-truth entrypoint from `references/build-when-missing.md`.
+4. Choose one primary entrypoint; other agent-specific files should mirror, symlink, or explicitly reference it.
+5. Keep the root entrypoint to scope, source-of-truth docs, do/avoid rules, commands, tests, and relevant skills.
+6. If a subtree has special rules, put a closer `AGENTS.md` in that subtree instead of overloading the root.
+7. Define drift prevention through a generation script, check script, CI job, or explicit manual checklist.
 
 ## Checks
 

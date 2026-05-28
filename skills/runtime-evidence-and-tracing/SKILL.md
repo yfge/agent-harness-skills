@@ -9,7 +9,7 @@ description: Use when connecting browser, device, backend, logs, metrics, reques
 
 Make runtime validation auditable by tying user-visible behavior to backend evidence through stable IDs and artifacts.
 
-Agents should not only say they tested something; they should leave run IDs, request IDs, logs, screenshots, network records, or traces. For shared harness terms, see `../../references/harness-patterns.md`.
+Agents should not only say they tested something; they should leave run IDs, request IDs, logs, screenshots, network records, or traces. For shared harness terms, see `../../references/harness-patterns.md`; when evidence surfaces are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ Agents should not only say they tested something; they should leave run IDs, req
 
 1. Search frontend API wrappers, backend request middleware, logs, metrics, and trace scripts.
 2. Confirm whether UI/client code can generate or propagate `X-Request-ID` and `X-Harness-Run-ID`.
-3. Design `artifacts/runs/<run_id>/` with manifest, summary, logs, network, screenshots, and trace files.
-4. Define the collection order for the target flow: start, authenticate if needed, operate, wait, read artifacts, and attribute the result.
-5. Define blocker categories: code regression, environment unavailable, provider quota/billing, data missing, and not evaluable.
-6. Explain how PRs or ledgers should reference artifacts without committing large temporary files.
+3. If no evidence contract exists, bootstrap the minimum run artifact contract from `references/build-when-missing.md`.
+4. Design `artifacts/runs/<run_id>/` with manifest, summary, logs, network, screenshots, and trace files.
+5. Define the collection order for the target flow: start, authenticate if needed, operate, wait, read artifacts, and attribute the result.
+6. Define blocker categories: code regression, environment unavailable, provider quota/billing, data missing, and not evaluable.
+7. Explain how PRs or ledgers should reference artifacts without committing large temporary files.
 
 ## Checks
 

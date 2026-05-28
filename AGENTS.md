@@ -18,6 +18,7 @@ This repository contains reusable skills for building agent-first harnesses acro
 
 - Run `python3 scripts/validate_skill_quality.py` before committing.
 - Run `python3 scripts/check_skill_language.py` before committing skill wording changes.
+- Run `python3 scripts/check_skill_closure.py` before committing skill workflow/reference changes.
 - For substantial wording changes, test the skill with at least one realistic prompt and record the observed output manually in the commit or PR notes.
 
 ## Commit Discipline

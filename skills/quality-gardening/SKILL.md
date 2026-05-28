@@ -9,7 +9,7 @@ description: Use when designing quality snapshots, generated quality reports, st
 
 Track quality as concrete metrics and debt movement, not as a vague single score.
 
-This skill freezes new degradation first, then uses generated metrics to show current quality and convergence direction. For shared harness terms, see `../../references/harness-patterns.md`.
+This skill freezes new degradation first, then uses generated metrics to show current quality and convergence direction. For shared harness terms, see `../../references/harness-patterns.md`; when quality surfaces are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,10 +33,11 @@ This skill freezes new degradation first, then uses generated metrics to show cu
 
 1. Search for `QUALITY_SCORE.md`, quality scripts, baselines, and CI gardening workflows.
 2. Choose four to eight metrics, and make each one automatically collectable.
-3. Separate blocking gates from informational reports.
-4. Use thresholds or baselines for historical problems; new degradation should fail.
-5. Generate Markdown for humans and JSON for scripts and trends.
-6. Design a gardening cadence: lower one threshold or close one allowlist item at a time.
+3. If no quality report exists, bootstrap the minimum score/report/baseline set from `references/build-when-missing.md`.
+4. Separate blocking gates from informational reports.
+5. Use thresholds or baselines for historical problems; new degradation should fail.
+6. Generate Markdown for humans and JSON for scripts and trends.
+7. Design a gardening cadence: lower one threshold or close one allowlist item at a time.
 
 ## Checks
 

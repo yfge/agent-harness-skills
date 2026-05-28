@@ -29,3 +29,6 @@ jobs:
 
       - name: Check skill language
         run: python3 scripts/check_skill_language.py
+
+      - name: Check skill closure
+        run: python3 scripts/check_skill_closure.py

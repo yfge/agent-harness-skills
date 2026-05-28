@@ -24,6 +24,7 @@
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
+python3 scripts/check_skill_closure.py
 ```
 
 对 substantial skill wording changes，至少在 `docs/scenario-tests.md` 记录一个 realistic prompt 和 observed output。`SKILL.md` 正文统一使用英文。

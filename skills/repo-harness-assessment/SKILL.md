@@ -9,7 +9,7 @@ description: Use when evaluating an existing repository's agent-readiness, harne
 
 Assess how well a repository lets an agent understand rules, make safe changes, verify them, and produce reviewable evidence.
 
-Use this skill to diagnose current harness maturity before proposing changes. For shared vocabulary and neutral artifact names, see `../../references/harness-patterns.md`.
+Use this skill to diagnose current harness maturity before proposing changes. For shared vocabulary and neutral artifact names, see `../../references/harness-patterns.md`; when expected harness files are missing, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -36,7 +36,8 @@ Use this skill to diagnose current harness maturity before proposing changes. Fo
 3. Search for `check_repo_harness`, `doctor`, `trace_run`, `quality`, `artifacts/runs`, `agent_chats`, and `tasks.md`.
 4. Check for a stable validation matrix: docs, contracts, unit/type/lint, browser/device/runtime, and CI.
 5. Check whether failures can be traced through run IDs, request IDs, logs, screenshots, JSON/JUnit output, PRs, or commits.
-6. Compress gaps into no more than three next steps, ordered by value and risk.
+6. If a layer is absent, define the minimum bootstrap artifact from `references/build-when-missing.md` before recommending broader work.
+7. Compress gaps into no more than three next steps, ordered by value and risk.
 
 ## Checks
 

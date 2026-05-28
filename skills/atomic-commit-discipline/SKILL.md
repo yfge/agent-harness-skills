@@ -9,7 +9,7 @@ description: Use when splitting changes into atomic commits, checking git status
 
 Turn completed work into small, reviewable commits with scoped validation and no unrelated files.
 
-This skill is not a PR template or ledger template. It focuses on minimal commits, exact staged paths, validation, and commit messages. For shared harness terms, see `../../references/harness-patterns.md`.
+This skill is not a PR template or ledger template. It focuses on minimal commits, exact staged paths, validation, and commit messages. For shared harness terms, see `../../references/harness-patterns.md`; when commit rules are absent, use `references/build-when-missing.md`.
 
 ## When To Use
 
@@ -33,11 +33,12 @@ This skill is not a PR template or ledger template. It focuses on minimal commit
 
 1. Run `git status --short --branch` and list all tracked and untracked changes.
 2. Read `git diff -- <path>` for every file you intend to commit; do not commit changes you do not understand.
-3. Group by logical boundary: docs, tests, implementation, harness, and ledger should not be mixed unless repository rules require the same commit.
-4. Run the smallest validation command that matches each group; fix failures before committing.
-5. Use `git add <exact paths>`; avoid `git add .` unless the whole worktree contains only this change.
-6. Write a Conventional Commit subject, and use the body for validation, skip reasons, or linked artifacts when needed.
-7. After committing, run `git show --stat --oneline HEAD` and `git status --short`.
+3. If no commit discipline is documented, bootstrap the minimum grouping and validation checklist from `references/build-when-missing.md`.
+4. Group by logical boundary: docs, tests, implementation, harness, and ledger should not be mixed unless repository rules require the same commit.
+5. Run the smallest validation command that matches each group; fix failures before committing.
+6. Use `git add <exact paths>`; avoid `git add .` unless the whole worktree contains only this change.
+7. Write a Conventional Commit subject, and use the body for validation, skip reasons, or linked artifacts when needed.
+8. After committing, run `git show --stat --oneline HEAD` and `git status --short`.
 
 ## Checks
 
