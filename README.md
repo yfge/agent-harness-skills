@@ -22,6 +22,8 @@ A repository harness is the engineering layer around a codebase that tells an ag
 
 Use it when a project has grown beyond "read the README and run the tests" and needs a more explicit way for agents to navigate source-of-truth documents, validation commands, runtime traces, quality gates, and delivery records.
 
+The guidance is role-based. `AGENTS.md`, `tasks.md`, `agent_chats/`, and `artifacts/runs/` are default artifacts, not mandatory forms. If a repository already has an equivalent issue tracker, review template, validation command, generated report, or runtime artifact system, the skills should map those surfaces first and create defaults only for missing roles.
+
 ## Why It Exists
 
 Coding agents can edit files quickly, but real repositories need more than fast edits. They need a stable operating surface.
@@ -54,6 +56,12 @@ The skills form a capability map for building and improving an agent-ready repos
 - `quality-gardening`: design quality snapshots, structural metrics, debt thresholds, and generated quality reports.
 - `design-doc-and-task-board`: coordinate design documents, work-state surfaces such as `tasks.md`, exec plans, status updates, acceptance criteria, and task-to-change traceability.
 - `atomic-commit-discipline`: split work into minimal commits, include related task-state updates, verify diffs, run scoped checks, and keep related evidence together.
+
+Shared methodology support:
+
+- `references/harness-profiles.json`: machine-readable repository archetypes and role mappings for library, service, monorepo, CLI/tooling, docs-only, and regulated/high-audit repositories.
+- `templates/`: neutral starter templates for missing roles such as entrypoints, validation matrices, delivery records, work-state surfaces, runtime evidence summaries, and quality reports.
+- `Detected Mapping`: every skill output should name the repository's existing equivalent artifacts before recommending new files.
 
 ## When To Use
 
@@ -196,13 +204,22 @@ docs/
   README.opencode.md
   scenario-tests.md
 references/
+  harness-profiles.json
   harness-patterns.md
 scripts/
   check_skill_closure.py
+  check_profile_consistency.py
   check_skill_language.py
   check_reference_neutrality.py
   validate_plugin_metadata.py
   validate_skill_quality.py
+templates/
+  AGENTS.md
+  delivery-record.md
+  quality-report.md
+  runtime-evidence-summary.md
+  task-state.md
+  validation-matrix.md
 ```
 
 ## Validation
@@ -213,6 +230,7 @@ python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
 python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
+python3 scripts/check_profile_consistency.py
 python3 scripts/validate_plugin_metadata.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```

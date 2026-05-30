@@ -20,6 +20,7 @@ This repository contains reusable skills for building agent-first harnesses acro
 - Run `python3 scripts/check_skill_language.py` before committing skill wording changes.
 - Run `python3 scripts/check_skill_closure.py` before committing skill workflow/reference changes.
 - Run `python3 scripts/check_reference_neutrality.py` before committing public skill references or repository guidance.
+- Run `python3 scripts/check_profile_consistency.py` before committing profile or template changes.
 - Run `python3 scripts/validate_plugin_metadata.py` before committing plugin or extension metadata changes.
 - Run `node --check .opencode/plugins/agent-harness-skills.js` before committing OpenCode plugin entrypoint changes.
 - For substantial wording changes, test the skill with at least one realistic prompt and record the observed output manually in the commit or PR notes.

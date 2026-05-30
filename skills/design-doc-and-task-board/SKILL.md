@@ -54,6 +54,11 @@ Design docs explain why and how; a work-state surface tracks current tasks, stat
 ```markdown
 # Design Doc And Task Board Decision
 
+## Detected Mapping
+- design source:
+- work-state:
+- exec plan:
+
 ## Where This Belongs
 - Design doc:
 - Work-state surface:

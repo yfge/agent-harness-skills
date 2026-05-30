@@ -36,3 +36,20 @@ Record realistic prompt tests for substantial skill wording changes. Keep entrie
 - Skills under review: `design-doc-and-task-board`, `atomic-commit-discipline`, `agent-ledger-and-delivery`, and shared harness references.
 - Observed output: If a repo has no reliable task tracker, recommend `tasks.md` or `docs/tasks.md` as the repo-local work-state surface; when a tracked task is completed, changed, or invalidated, stage that task-state update with the same logical commit as the related change.
 - Follow-up: Keep external trackers valid as authoritative work-state systems, and keep ledgers as delivery evidence rather than task-status ownership.
+
+## 2026-05-30 - Methodology Plugin Generalization
+
+- Prompt: "Make this project more generic and reusable as a methodology plugin."
+- Skills under review: all 9 repository skills, shared harness references, profile metadata, and neutral templates.
+- Observed output: Skill output should include `Detected Mapping`; existing issue trackers, review templates, validation commands, generated reports, or runtime artifact systems should be mapped before default files are proposed.
+- Follow-up: Add machine-readable harness profiles, neutral templates, profile consistency validation, context-aware neutrality checks, and scenario coverage by repository archetype.
+
+## Repository Archetype Scenario Matrix
+
+| Archetype | Prompt | Expected behavior |
+| --- | --- | --- |
+| Tiny repository | "Assess this small utility repo with only README and one test command." | Recommend entrypoint plus validation mapping only; do not require runtime evidence, ledger, or quality reports by default. |
+| Existing issue tracker repository | "This repo uses GitHub Issues and PR templates; design task and delivery surfaces." | Map GitHub Issues to work-state and PR template to ledger before recommending any repo-local task or ledger files. |
+| Monorepo | "Assess a monorepo with multiple packages and shared CI." | Recommend entrypoint, work-state, and validation roles; prefer package-aware validation mapping over a single heavy command. |
+| Runtime-heavy repository | "Connect a user-facing flow to validation evidence." | Require runtime-evidence mapping or a minimal run artifact summary, with blocker classification and linked validation. |
+| Docs-only repository | "Make this documentation repo agent-ready." | Recommend entrypoint and docs validation only; avoid runtime evidence and quality governance unless the repository already has those roles. |

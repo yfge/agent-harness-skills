@@ -36,6 +36,9 @@ jobs:
       - name: Check reference neutrality
         run: python3 scripts/check_reference_neutrality.py
 
+      - name: Check harness profile consistency
+        run: python3 scripts/check_profile_consistency.py
+
       - name: Validate plugin metadata
         run: python3 scripts/validate_plugin_metadata.py
 

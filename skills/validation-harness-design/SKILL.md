@@ -52,6 +52,11 @@ This skill turns scattered checks into commands agents can run, CI can reuse, an
 ```markdown
 # Validation Harness Design
 
+## Detected Mapping
+- validation:
+- runtime-evidence:
+- CI:
+
 ## Change-Type Matrix
 | Change type | Minimum check | Escalation |
 | --- | --- | --- |

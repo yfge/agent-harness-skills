@@ -52,6 +52,11 @@ This skill freezes new degradation first, then uses generated metrics to show cu
 ```markdown
 # Quality Gardening
 
+## Detected Mapping
+- quality:
+- validation:
+- work-state:
+
 ## Metrics
 | Metric | Source | Threshold | Gate |
 | --- | --- | --- | --- |

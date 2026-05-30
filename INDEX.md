@@ -2,7 +2,7 @@
 
 ## Recommended Composition
 
-1. `repo-harness-assessment` - start here for an existing repo.
+1. `repo-harness-assessment` - start here for an existing repo; map existing artifacts to roles before recommending new files.
 2. `agent-entrypoint-design` - define how agents discover rules and source-of-truth docs.
 3. `design-doc-and-task-board` - decide how product/design intent becomes tracked work state.
 4. `repo-contracts-and-boundaries` - encode structural limits and drift prevention.
@@ -15,6 +15,8 @@
 ## Routing Notes
 
 - Use `repo-harness-assessment` when the user asks what a repo is missing.
+- Use `references/harness-profiles.json` to choose the lightest appropriate role set for the repository archetype.
+- Include `Detected Mapping` in skill outputs so existing issue trackers, review templates, validation commands, reports, or artifact systems can stand in for default file names.
 - Use `agent-entrypoint-design` when the user mentions `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Cursor rules, GitHub instructions, or source-of-truth navigation.
 - Use `design-doc-and-task-board` when the user asks where requirements, design docs, `tasks.md`, external task systems, or exec plans should live.
 - Use `repo-contracts-and-boundaries` when the user asks to protect architecture, layering, dependency direction, ownership, baselines, or allowlists.

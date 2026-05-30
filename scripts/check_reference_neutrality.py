@@ -19,6 +19,11 @@ BANNED_SOURCE_PROJECTS = (
     "elab",
 )
 BANNED_DOMAIN_MARKERS = (
+    "test account",
+    "username",
+    "password",
+)
+ENGINEERING_FORM_TERMS = (
     "backend",
     "frontend",
     "browser",
@@ -33,15 +38,16 @@ BANNED_DOMAIN_MARKERS = (
     "timeline",
     "wechat",
     "figma",
-    "test account",
-    "username",
-    "password",
 )
 ABSOLUTE_LOCAL_PATH_RE = re.compile(
     r"(?i)(?:/Users/|/home/|/private/tmp/|[A-Z]:\\Users\\)"
 )
 CONCRETE_URL_RE = re.compile(r"https?://[^\s>)]+")
 PLACEHOLDER_URL_RE = re.compile(r"^https?://(?:example\.(?:com|org|test)|localhost)")
+DEFAULT_ASSUMPTION_RE = re.compile(
+    r"\b(?:all|every|any)\s+(?:repo|repos|repository|repositories)\b|\b(?:always|must|required)\b",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -69,6 +75,8 @@ def public_surface_files(root: Path) -> list[Path]:
             files.append(path)
 
     for pattern in (
+        "references/*.json",
+        "templates/*.md",
         "references/**/*.md",
         "skills/*/SKILL.md",
         "skills/*/references/*.md",
@@ -80,6 +88,15 @@ def public_surface_files(root: Path) -> list[Path]:
 
 def _contains_term(line: str, term: str) -> bool:
     return re.search(rf"(?<![a-z0-9-]){re.escape(term)}(?![a-z0-9-])", line) is not None
+
+
+def _allows_engineering_form_terms(path: Path) -> bool:
+    normalized = path.as_posix()
+    return (
+        normalized.endswith("references/harness-profiles.json")
+        or "/templates/" in normalized
+        or normalized.startswith("templates/")
+    )
 
 
 def scan_file(path: Path) -> list[NeutralityIssue]:
@@ -101,7 +118,20 @@ def scan_file(path: Path) -> list[NeutralityIssue]:
                     NeutralityIssue(
                         path,
                         line_number,
-                        f"engineering-form or domain marker is not allowed: {term}",
+                        f"private account marker is not allowed: {term}",
+                    )
+                )
+        for term in ENGINEERING_FORM_TERMS:
+            if not _contains_term(lower, term):
+                continue
+            if _allows_engineering_form_terms(path):
+                continue
+            if DEFAULT_ASSUMPTION_RE.search(line):
+                issues.append(
+                    NeutralityIssue(
+                        path,
+                        line_number,
+                        f"engineering-form default assumption is not allowed: {term}",
                     )
                 )
 

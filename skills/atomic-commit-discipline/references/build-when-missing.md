@@ -2,21 +2,27 @@
 
 Use this when a repository has no commit discipline beyond informal convention. Pattern sources include Conventional Commit policies, exact-path staging rules, task-state coupling, ledger coupling, and validation-before-commit checklists.
 
+## Equivalent Artifacts
+
+- Contributor guides, pull request templates, protected-branch rules, or existing release policies may already satisfy parts of the commit discipline role.
+- Record the chosen artifacts under `Detected Mapping` before adding new policy text.
+- Add default policy sections only where no equivalent rule exists.
+
 ## Minimum Files
 
-- Commit policy section in `AGENTS.md` or `CONTRIBUTING.md`.
-- Task-state policy section in `tasks.md`, `docs/tasks.md`, or the repository's planning documentation.
+- Commit policy section in `AGENTS.md`, `CONTRIBUTING.md`, or an explicitly mapped equivalent.
+- Task-state policy section in the mapped work-state surface or planning documentation.
 - Optional `.github/pull_request_template.md`.
 - Optional `docs/commit-checklist.md` if the policy is too long for the entrypoint.
 - Optional CI commit-message or ledger-coupling checker.
 
 ## Bootstrap Steps
 
-1. State that commits must be atomic: one logical purpose per commit.
-2. Require reading `git status`, `git diff`, and `git diff --cached` before staging.
-3. Require exact-path staging unless the worktree contains only the current change.
+1. Map existing commit, review, and task-state rules.
+2. State only the missing commit rules: one logical purpose per commit and exact-path staging.
+3. Require reading `git status`, `git diff`, and `git diff --cached` before staging.
 4. State the task coupling rule: when a commit completes, changes, or invalidates a tracked task, include the task-state update in the same logical commit.
-5. Define the commit subject format, preferably Conventional Commits.
+5. Define the commit subject format, preferably Conventional Commits when no repository format exists.
 6. Define minimum validation evidence for docs, tests, implementation, harness, task-state, and ledger changes.
 
 ## Validation

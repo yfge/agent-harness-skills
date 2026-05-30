@@ -52,6 +52,14 @@ Use this skill to diagnose current harness maturity before proposing changes. Fo
 ```markdown
 # Repo Harness Assessment
 
+## Detected Mapping
+- entrypoint:
+- work-state:
+- ledger:
+- validation:
+- runtime-evidence:
+- quality:
+
 ## Current State
 - Agent entrypoint:
 - Source-of-truth docs:

@@ -1,20 +1,27 @@
 # Build When Missing
 
-Use this when a repository has no usable agent entrypoint. Pattern sources include source-of-truth `AGENTS.md` files, symlink/mirror policies, and subtree overrides in larger repositories.
+Use this when a repository has no usable agent entrypoint. Pattern sources include first-read guidance, mirror policies, and subtree overrides in larger repositories.
+
+## Equivalent Artifacts
+
+- Existing agent instruction files, contributor guides, or runtime-specific rule files may already satisfy the entrypoint role.
+- Record the chosen artifact under `Detected Mapping` before creating a default file.
+- Use `templates/AGENTS.md` only when no equivalent entrypoint exists.
 
 ## Minimum Files
 
-- Root `AGENTS.md`.
+- Root `AGENTS.md` or an explicitly mapped equivalent entrypoint.
 - Optional mirrors: `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, or `.github/instructions/*`.
 - Optional subtree `AGENTS.md` only where a directory has stricter local rules.
 
 ## Bootstrap Steps
 
-1. Create a root `AGENTS.md` that states scope, source-of-truth docs, do/avoid rules, validation commands, and commit policy.
-2. Declare instruction precedence: system/developer, user, nearest agent file, linked docs.
-3. Add a mirror policy: symlink, exact copy with generation marker, or explicit "read AGENTS.md first" pointer.
-4. Add only high-signal navigation; link deeper docs instead of embedding long procedures.
-5. Add a drift check if mirrors are generated or exact-copy files.
+1. Map any existing first-read guidance to the entrypoint role.
+2. If no equivalent exists, create a root entrypoint from `templates/AGENTS.md`.
+3. Declare instruction precedence: system/developer, user, nearest agent file, linked docs.
+4. Add a mirror policy: symlink, exact copy with generation marker, or explicit "read the primary entrypoint first" pointer.
+5. Add only high-signal navigation; link deeper docs instead of embedding long procedures.
+6. Add a drift check if mirrors are generated or exact-copy files.
 
 ## Validation
 

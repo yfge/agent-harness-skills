@@ -54,6 +54,11 @@ This skill focuses on delivery evidence and long-term traceability, not commit s
 ```markdown
 # Agent Ledger And Delivery
 
+## Detected Mapping
+- ledger:
+- work-state:
+- validation:
+
 ## Ledger Policy
 - Directory:
 - Filename:

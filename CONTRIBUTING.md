@@ -46,6 +46,7 @@ python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
 python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
+python3 scripts/check_profile_consistency.py
 python3 scripts/validate_plugin_metadata.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
@@ -54,6 +55,7 @@ When changing plugin or extension metadata, also verify the relevant JSON and Op
 
 ```bash
 python3 scripts/validate_plugin_metadata.py
+python3 scripts/check_profile_consistency.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
 

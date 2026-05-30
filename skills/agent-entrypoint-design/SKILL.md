@@ -52,6 +52,11 @@ The entrypoint should be navigation plus hard rules, not a long project encyclop
 ```markdown
 # Agent Entrypoint Design
 
+## Detected Mapping
+- entrypoint:
+- mirrors:
+- validation:
+
 ## Source Of Truth
 - Primary entrypoint:
 - Mirrors:

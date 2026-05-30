@@ -147,6 +147,8 @@ def validate_skill_dir(path: Path, issues: Issues) -> None:
 
     if "```markdown" not in text:
         issues.error(f"{skill_md}: Output Format must include a markdown code block")
+    if "## Detected Mapping" not in text:
+        issues.error(f"{skill_md}: Output Format must include Detected Mapping")
 
 
 def main() -> int:

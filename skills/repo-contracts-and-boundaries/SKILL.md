@@ -52,6 +52,11 @@ This skill freezes new violations first and then supports gradual baseline reduc
 ```markdown
 # Repo Contracts And Boundaries
 
+## Detected Mapping
+- architecture:
+- contracts:
+- validation:
+
 ## Protected Boundaries
 -
 

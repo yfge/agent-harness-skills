@@ -85,6 +85,44 @@ class CheckReferenceNeutralityTest(unittest.TestCase):
                 issues,
             )
 
+    def test_engineering_form_terms_pass_in_profiles(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write_surface(
+                Path(tmp),
+                "references/harness-profiles.json",
+                '{"archetypes":[{"id":"service","notes":"backend and frontend surfaces may exist"}]}\n',
+            )
+
+            issues = checker.scan_file(path)
+
+            self.assertEqual([], issues)
+
+    def test_engineering_form_default_assumption_fails_in_skills(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write_surface(
+                Path(tmp),
+                "skills/sample-skill/SKILL.md",
+                "All repositories must run browser smoke tests before review.\n",
+            )
+
+            issues = checker.scan_file(path)
+
+            self.assertTrue(
+                any("engineering-form default assumption" in issue.message for issue in issues),
+                issues,
+            )
+
+    def test_public_surface_files_include_profiles_and_templates(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            profile = write_surface(root, "references/harness-profiles.json", "{}\n")
+            template = write_surface(root, "templates/validation-matrix.md", "# Template\n")
+
+            files = checker.public_surface_files(root)
+
+            self.assertIn(profile, files)
+            self.assertIn(template, files)
+
 
 if __name__ == "__main__":
     unittest.main()

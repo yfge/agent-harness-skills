@@ -52,6 +52,11 @@ Agents should not only say they tested something; they should leave run IDs, req
 ```markdown
 # Runtime Evidence And Tracing
 
+## Detected Mapping
+- runtime-evidence:
+- validation:
+- ledger:
+
 ## ID Contract
 - Run ID:
 - Request ID:

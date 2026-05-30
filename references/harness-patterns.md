@@ -1,10 +1,10 @@
 # Harness Patterns Reference
 
-This reference keeps shared vocabulary out of individual skills. Use it when a skill needs neutral names for common harness concepts without copying product-specific workflow.
+This reference keeps shared vocabulary out of individual skills. Use it when a skill needs neutral names for common harness concepts without copying product-specific workflow. Roles describe what a harness surface does; artifact names are defaults, not requirements.
 
 ## Core Layers
 
-- Entrypoint: the first file an agent reads, usually `AGENTS.md` or an equivalent mirror.
+- Entrypoint: the first surface an agent reads, often `AGENTS.md` or an equivalent mirror.
 - Source of truth: the versioned document or script that owns a decision.
 - Contract: a rule that can be checked by script or review, usually with diff and audit modes.
 - Validation surface: the commands that prove a change is safe enough for review.
@@ -13,9 +13,22 @@ This reference keeps shared vocabulary out of individual skills. Use it when a s
 - Ledger: a durable delivery-evidence record of agent intent, changes, validation, risks, and linked tasks or commits.
 - Quality garden: a small set of generated metrics and baselines used to freeze new degradation and reduce old debt.
 
+## Role Mapping
+
+Before recommending new files, map existing repository surfaces to harness roles:
+
+- `entrypoint`: agent-facing first-read instructions.
+- `work-state`: authoritative task state and acceptance criteria.
+- `ledger`: durable delivery or review evidence.
+- `validation`: command surface and CI gates.
+- `runtime-evidence`: run artifacts, reports, traces, or equivalent observed-behavior proof.
+- `quality`: generated metrics, thresholds, and baseline movement.
+
+If a repository already has an equivalent artifact, use that artifact and record it in `Detected Mapping`. Only create the default artifact when the role is absent.
+
 ## Recommended Defaults
 
-These names are lightweight repo-local defaults, not required forms. If a project already has a reliable Jira, Linear, GitHub Issues, internal board, or equivalent system, treat that system as the work-state source of truth.
+These names are lightweight repo-local defaults, not required forms. If a project already has a reliable Jira, Linear, GitHub Issues, internal board, review template, test runner, generated report, or equivalent system, map that system to the relevant role.
 
 - `AGENTS.md` for agent entrypoint rules.
 - `docs/design/` for longer design decisions.
@@ -24,6 +37,12 @@ These names are lightweight repo-local defaults, not required forms. If a projec
 - `artifacts/runs/<run_id>/` for runtime evidence bundles.
 - `agent_chats/` or `agents_chat/` for delivery ledgers that summarize evidence; they may reference tasks and commits but do not replace task state.
 - `scripts/check_*` or `scripts/doctor*` for local repository checks.
+
+## Repository Profiles
+
+Use `references/harness-profiles.json` to choose the minimum useful role set for a repository archetype. A small library or docs-only repository should not inherit runtime-evidence or heavy quality governance by default. A service or high-audit repository may need stronger runtime evidence or ledger roles.
+
+Use `templates/` only after mapping existing equivalents. Templates are starting points for missing roles, not a prescribed repository shape.
 
 ## Task And Commit Coupling
 

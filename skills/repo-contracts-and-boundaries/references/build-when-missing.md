@@ -2,20 +2,27 @@
 
 Use this when architecture intent exists only in conversations or conventions. Pattern sources include repositories with `ARCHITECTURE.md`, contract docs, diff/audit checkers, generated baselines, and allowlists.
 
+## Equivalent Artifacts
+
+- Architecture indexes, design docs, lint rules, import-boundary checks, or review policies may already satisfy the contract role.
+- Record the chosen artifacts under `Detected Mapping` before creating default architecture or checker files.
+- Add default files only for missing roles, not for surfaces already covered by an equivalent.
+
 ## Minimum Files
 
-- `ARCHITECTURE.md` or `docs/architecture/index.md`.
-- `docs/architecture/contracts.md` or a contract section in the architecture doc.
-- `scripts/check_repo_contracts.py` or similarly named standard-library checker.
+- `ARCHITECTURE.md`, `docs/architecture/index.md`, or an explicitly mapped architecture source.
+- `docs/architecture/contracts.md`, a contract section, or an explicitly mapped equivalent.
+- `scripts/check_repo_contracts.py` or a mapped checker command.
 - Baseline or allowlist file under `docs/generated/`, `scripts/baselines/`, or `scripts/harness-baselines/`.
 
 ## Bootstrap Steps
 
-1. Write the architecture map: main surfaces, dependency direction, known choke points, and allowed ownership boundaries.
-2. Choose two or three rules that can be checked mechanically before adding more.
-3. Create a checker with `--mode diff` for changed files and `--mode audit` for the full repository.
-4. Put historical violations in a baseline or allowlist with owner, reason, and repayment note.
-5. Make new violations fail while historical debt remains visible.
+1. Map existing architecture and contract sources.
+2. Write or amend the architecture map only for missing source-of-truth coverage.
+3. Choose two or three rules that can be checked mechanically before adding more.
+4. Create or map a checker with diff mode for changed files and audit mode for full-repository reports.
+5. Put historical violations in a baseline or allowlist with owner, reason, and repayment note.
+6. Make new violations fail while historical debt remains visible.
 
 ## Validation
 

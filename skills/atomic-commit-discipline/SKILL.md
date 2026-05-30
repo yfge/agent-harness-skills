@@ -57,6 +57,11 @@ This skill is not a review template or ledger template. It focuses on minimal co
 ```markdown
 # Atomic Commit Plan
 
+## Detected Mapping
+- work-state:
+- ledger:
+- validation:
+
 ## Worktree State
 -
 

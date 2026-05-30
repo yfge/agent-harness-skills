@@ -57,6 +57,9 @@ English overview.
 
 ```markdown
 # Sample
+
+## Detected Mapping
+- entrypoint: `AGENTS.md`
 ```
 
 ## Common Mistakes
@@ -118,6 +121,21 @@ class ValidateSkillQualityTest(unittest.TestCase):
                     "required sections must appear in order" in error
                     for error in issues.errors
                 ),
+                issues.errors,
+            )
+
+    def test_missing_detected_mapping_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            issues = validator.Issues()
+            body = VALID_BODY.replace(
+                "\n## Detected Mapping\n- entrypoint: `AGENTS.md`\n",
+                "\n",
+            )
+
+            validator.validate_skill_dir(make_skill(Path(tmp), body), issues)
+
+            self.assertTrue(
+                any("Output Format must include Detected Mapping" in error for error in issues.errors),
                 issues.errors,
             )
 
