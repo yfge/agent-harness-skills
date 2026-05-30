@@ -46,16 +46,14 @@ python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
 python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
+python3 scripts/validate_plugin_metadata.py
+node --check .opencode/plugins/agent-harness-skills.js
 ```
 
 When changing plugin or extension metadata, also verify the relevant JSON and OpenCode plugin entrypoint:
 
 ```bash
-python3 -m json.tool .codex-plugin/plugin.json >/dev/null
-python3 -m json.tool .claude-plugin/plugin.json >/dev/null
-python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
-python3 -m json.tool gemini-extension.json >/dev/null
-python3 -m json.tool package.json >/dev/null
+python3 scripts/validate_plugin_metadata.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
 

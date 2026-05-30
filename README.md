@@ -103,7 +103,10 @@ Verify by asking the agent to list or load the `repo-harness-assessment` skill.
 This repository includes `.codex-plugin/plugin.json`, which exposes `./skills/` as a Codex plugin.
 
 - For a packaged or marketplace install, install `agent-harness-skills` through the Codex plugin UI or `/plugins` flow once the repository is published in that channel.
-- For local development, register this repository as a local plugin source or through a personal marketplace entry that points to the repository root.
+- For local development, register this repository through a configured marketplace entry, then install `agent-harness-skills` from that marketplace.
+- Keep `.codex-plugin/plugin.json` as the Codex source of truth. It must point `skills` at `./skills/`, omit `apps` and `mcpServers` unless their companion manifests exist, and keep version metadata aligned with the other extension manifests.
+- When publishing through a marketplace, update that marketplace entry after the release commit so its source, ref, or sha points at the published revision.
+- Validate packaging changes with `python3 scripts/validate_plugin_metadata.py`.
 - Verify by asking Codex to use `repo-harness-assessment` on a repository.
 
 ### Claude Code
@@ -198,6 +201,7 @@ scripts/
   check_skill_closure.py
   check_skill_language.py
   check_reference_neutrality.py
+  validate_plugin_metadata.py
   validate_skill_quality.py
 ```
 
@@ -209,6 +213,8 @@ python3 scripts/validate_skill_quality.py
 python3 scripts/check_skill_language.py
 python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
+python3 scripts/validate_plugin_metadata.py
+node --check .opencode/plugins/agent-harness-skills.js
 ```
 
 For substantial skill wording changes, record at least one realistic prompt and observed output in `docs/scenario-tests.md`.

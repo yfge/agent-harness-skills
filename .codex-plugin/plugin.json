@@ -1,4 +1,5 @@
 {
+  "id": "agent-harness-skills",
   "name": "agent-harness-skills",
   "version": "0.1.0",
   "description": "Reusable skills for building agent-ready repository harnesses.",
@@ -15,6 +16,8 @@
     "longDescription": "Use Agent Harness Skills to assess and design repository harnesses: agent entrypoints, architecture boundaries, validation surfaces, runtime evidence, delivery records, quality gates, and atomic commits.",
     "developerName": "Agent Harness Skills contributors",
     "category": "Coding",
+    "websiteURL": "https://github.com/yfge/agent-harness-skills",
+    "brandColor": "#2F6FED",
     "capabilities": [
       "Interactive",
       "Read",
@@ -27,6 +30,7 @@
     "skills",
     "repository",
     "validation",
+    "codex-plugin",
     "runtime-evidence",
     "delivery"
   ]

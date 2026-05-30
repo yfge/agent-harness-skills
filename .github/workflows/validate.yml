@@ -35,3 +35,9 @@ jobs:
 
       - name: Check reference neutrality
         run: python3 scripts/check_reference_neutrality.py
+
+      - name: Validate plugin metadata
+        run: python3 scripts/validate_plugin_metadata.py
+
+      - name: Check OpenCode plugin entrypoint
+        run: node --check .opencode/plugins/agent-harness-skills.js
