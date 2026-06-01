@@ -23,7 +23,7 @@ For a git-backed install, use the repository URL:
 }
 ```
 
-Restart OpenCode. The plugin registers this repository's `skills/` directory.
+Restart OpenCode. The plugin injects a compact startup bootstrap into the next chat and registers this repository's `skills/` directory for runtimes that honor plugin config changes.
 
 ## Verify
 
@@ -47,4 +47,5 @@ Pull the repository or update the git-backed plugin source, then restart OpenCod
 
 - Confirm `opencode.json` points to the repository root, not the `skills/` folder.
 - Confirm `package.json` exists at the repository root.
+- Confirm your OpenCode version supports `experimental.chat.system.transform` if the startup bootstrap is missing.
 - Confirm each skill has a `SKILL.md` file with valid frontmatter.

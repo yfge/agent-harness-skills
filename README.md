@@ -145,7 +145,7 @@ Gemini loads `GEMINI.md`, which points it to `INDEX.md` for skill routing. Verif
 
 ### OpenCode
 
-This repository includes an OpenCode plugin entrypoint at `.opencode/plugins/agent-harness-skills.js`.
+This repository includes an OpenCode plugin entrypoint at `.opencode/plugins/agent-harness-skills.js`. On startup, the plugin injects a compact bootstrap that points the agent to `INDEX.md`, the native OpenCode skill tool, and this repository's `skills/` directory.
 
 For a local clone, add the repository root to the `plugin` array in your global or project-level `opencode.json`:
 
@@ -163,7 +163,7 @@ For a git-backed install:
 }
 ```
 
-Restart OpenCode, then verify with:
+Restart OpenCode, then verify that the startup bootstrap is present and that skills can be loaded:
 
 ```text
 use skill tool to list skills

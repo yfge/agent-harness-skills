@@ -145,7 +145,7 @@ Gemini 会加载 `GEMINI.md`，再通过 `INDEX.md` 路由到具体 skill。验�
 
 ### OpenCode
 
-本仓库包含 OpenCode plugin 入口：`.opencode/plugins/agent-harness-skills.js`。
+本仓库包含 OpenCode plugin 入口：`.opencode/plugins/agent-harness-skills.js`。启动时，插件会注入一个轻量 bootstrap，把 agent 指向 `INDEX.md`、OpenCode 原生 skill tool 和本仓库的 `skills/` 目录。
 
 如果使用本地 clone，在全局或项目级 `opencode.json` 的 `plugin` 数组里加入仓库根目录：
 
@@ -163,7 +163,7 @@ Gemini 会加载 `GEMINI.md`，再通过 `INDEX.md` 路由到具体 skill。验�
 }
 ```
 
-重启 OpenCode 后，用下面命令验证：
+重启 OpenCode 后，确认启动 bootstrap 已出现，并用下面命令验证 skills 可加载：
 
 ```text
 use skill tool to list skills

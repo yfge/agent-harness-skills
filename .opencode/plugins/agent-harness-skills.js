@@ -1,14 +1,65 @@
 /**
  * Agent Harness Skills plugin for OpenCode.
  *
- * Registers this repository's skills directory so OpenCode can discover the
- * repository harness skills without manual symlinks.
+ * Injects a compact startup bootstrap so OpenCode agents discover the harness
+ * methodology immediately, and registers this repository's skills directory
+ * for runtimes that honor plugin config hooks.
  */
 
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const BOOTSTRAP_MARKER = 'agent-harness-skills:bootstrap:v1';
+
+let bootstrapCache;
+
+const readTextIfExists = (filePath) => {
+  try {
+    return fs.readFileSync(filePath, 'utf8').trim();
+  } catch (error) {
+    if (error && error.code === 'ENOENT') {
+      return '';
+    }
+    throw error;
+  }
+};
+
+const buildBootstrapContext = (skillsDir) => {
+  if (bootstrapCache !== undefined) {
+    return bootstrapCache;
+  }
+
+  const indexPath = path.resolve(__dirname, '../../INDEX.md');
+  const index = readTextIfExists(indexPath);
+  const routing = index || [
+    '# Skill Index',
+    '',
+    '- Start with `repo-harness-assessment` for existing repository harness work.',
+    '- Use the native skill tool to load the matching Agent Harness Skill before acting.',
+  ].join('\n');
+
+  bootstrapCache = [
+    `<!-- ${BOOTSTRAP_MARKER} -->`,
+    'You have Agent Harness Skills available through this OpenCode plugin.',
+    '',
+    'Startup routing:',
+    "- Use OpenCode's native skill tool to list or load the matching skill before repository harness work.",
+    `- Skills directory: ${skillsDir}`,
+    '- If native skill discovery is unavailable, read the relevant `SKILL.md` from that directory directly.',
+    '- Keep guidance repo-neutral and follow the target repository validation rules before delivery.',
+    '',
+    routing,
+  ].join('\n');
+
+  return bootstrapCache;
+};
+
+const hasBootstrapContext = (systemParts) =>
+  systemParts.some(
+    (part) => typeof part === 'string' && part.includes(BOOTSTRAP_MARKER)
+  );
 
 export const AgentHarnessSkillsPlugin = async () => {
   const skillsDir = path.resolve(__dirname, '../../skills');
@@ -20,6 +71,16 @@ export const AgentHarnessSkillsPlugin = async () => {
       if (!config.skills.paths.includes(skillsDir)) {
         config.skills.paths.push(skillsDir);
       }
+    },
+    'experimental.chat.system.transform': async (_input, output) => {
+      output.system = Array.isArray(output.system) ? output.system : [];
+      if (hasBootstrapContext(output.system)) {
+        return;
+      }
+
+      const bootstrap = buildBootstrapContext(skillsDir);
+      const insertionIndex = output.system.length > 0 ? 1 : 0;
+      output.system.splice(insertionIndex, 0, bootstrap);
     },
   };
 };
