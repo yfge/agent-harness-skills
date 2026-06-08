@@ -18,6 +18,7 @@
     "category": "Coding",
     "websiteURL": "https://github.com/yfge/agent-harness-skills",
     "brandColor": "#2F6FED",
+    "composerIcon": "./assets/icon.svg",
     "capabilities": [
       "Interactive",
       "Read",
