@@ -37,7 +37,7 @@ const buildBootstrapContext = (skillsDir) => {
     '# Skill Index',
     '',
     '- Start with `repo-harness-assessment` for existing repository harness work.',
-    '- Use the native skill tool to load the matching Agent Harness Skill before acting.',
+    '- Load the matching Agent Harness Skill before substantive repository harness work.',
   ].join('\n');
 
   bootstrapCache = [
@@ -45,8 +45,9 @@ const buildBootstrapContext = (skillsDir) => {
     'You have Agent Harness Skills available through this OpenCode plugin.',
     '',
     'Startup routing:',
-    "- Use OpenCode's native skill tool to list or load the matching skill before repository harness work.",
+    "- Use OpenCode's native skill tool to list skills, then load the relevant skill for substantive repository harness work.",
     `- Skills directory: ${skillsDir}`,
+    '- For lightweight discussion, read-only inspection, or routing questions, use the index first and load a skill only if needed.',
     '- If native skill discovery is unavailable, read the relevant `SKILL.md` from that directory directly.',
     '- Keep guidance repo-neutral and follow the target repository validation rules before delivery.',
     '',

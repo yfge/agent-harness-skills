@@ -44,6 +44,13 @@ Record realistic prompt tests for substantial skill wording changes. Keep entrie
 - Observed output: Skill output should include `Detected Mapping`; existing issue trackers, review templates, validation commands, generated reports, or runtime artifact systems should be mapped before default files are proposed.
 - Follow-up: Add machine-readable harness profiles, neutral templates, profile consistency validation, context-aware neutrality checks, and scenario coverage by repository archetype.
 
+## 2026-06-23 - Trigger Strictness Relaxation
+
+- Prompt: "这个 skills 套件触发方式是不是有点太严格了"
+- Skills under review: `INDEX.md` routing, OpenCode bootstrap wording, and `atomic-commit-discipline` trigger wording.
+- Observed output: Skill loading should distinguish hard triggers, soft routing, and no-trigger read-only discussion; loading is required for substantive harness artifact work, not casual keyword mentions or ordinary status/diff inspection.
+- Follow-up: Keep frontmatter descriptions as triggering conditions only, and avoid keyword-only triggers that load skills for lightweight questions.
+
 ## Repository Archetype Scenario Matrix
 
 | Archetype | Prompt | Expected behavior |

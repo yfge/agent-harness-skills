@@ -12,16 +12,22 @@
 8. `quality-gardening` - track quality as generated metrics and debt movement.
 9. `atomic-commit-discipline` - finish work in minimal, reviewable commits with related task-state updates.
 
+## Trigger Strength
+
+- Hard trigger: load the matching skill before creating, refactoring, committing, or validating repository harness artifacts, entrypoints, checks, rules, or delivery records.
+- Soft route: use this index first for assessment, discussion, or deciding which skill applies; load only the relevant skill when the task turns into substantive harness work.
+- No trigger: do not load a skill solely because a file name, artifact name, or keyword appears in a read-only question, status/diff inspection, or casual comparison.
+
 ## Routing Notes
 
 - Use `repo-harness-assessment` when the user asks what a repo is missing.
 - Use `references/harness-profiles.json` to choose the lightest appropriate role set for the repository archetype.
 - Include `Detected Mapping` in skill outputs so existing issue trackers, review templates, validation commands, reports, or artifact systems can stand in for default file names.
-- Use `agent-entrypoint-design` when the user mentions `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Cursor rules, GitHub instructions, or source-of-truth navigation.
+- Use `agent-entrypoint-design` when the user asks to create, refactor, reconcile, or diagnose `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Cursor rules, GitHub instructions, or source-of-truth navigation.
 - Use `design-doc-and-task-board` when the user asks where requirements, design docs, `tasks.md`, external task systems, or exec plans should live.
 - Use `repo-contracts-and-boundaries` when the user asks to protect architecture, layering, dependency direction, ownership, baselines, or allowlists.
 - Use `validation-harness-design` when the user asks for validation commands, doctor scripts, test matrices, CI gates, smoke checks, JSON, or JUnit outputs.
-- Use `runtime-evidence-and-tracing` when the user mentions runtime evidence, request IDs, run IDs, logs, traces, screenshots, external dependency evidence, or artifacts.
-- Use `agent-ledger-and-delivery` when the user asks for agent work records, review evidence, delivery summaries, linked tasks or commits, validation notes, or handoff records.
-- Use `quality-gardening` when the user asks for quality snapshots, generated reports, structural metrics, debt thresholds, regression budgets, or cleanup loops.
-- Use `atomic-commit-discipline` when the user asks to commit, split changes, stage paths, include task-state updates, or avoid unrelated work.
+- Use `runtime-evidence-and-tracing` when the user asks to connect, diagnose, or design runtime evidence with request IDs, run IDs, logs, traces, screenshots, external dependency evidence, or artifacts.
+- Use `agent-ledger-and-delivery` when the user asks to create, refactor, or evaluate agent work records, review evidence, delivery summaries, linked tasks or commits, validation notes, or handoff records.
+- Use `quality-gardening` when the user asks to design, evaluate, or maintain quality snapshots, generated reports, structural metrics, debt thresholds, regression budgets, or cleanup loops.
+- Use `atomic-commit-discipline` when the user asks to commit, prepare a commit, split changes, stage paths, include task-state updates, or avoid unrelated work.
