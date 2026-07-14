@@ -1,6 +1,17 @@
 {
   "version": 1,
   "templateDirectory": "templates",
+  "skillRouting": {
+    "assessment": "repo-harness-assessment",
+    "entrypoint": "repo-harness-assessment",
+    "contracts": "repo-contracts-and-boundaries",
+    "quality": "repo-contracts-and-boundaries",
+    "validation": "validation-harness-design",
+    "runtime-evidence": "runtime-evidence-and-tracing",
+    "work-state": "work-state-and-delivery",
+    "ledger": "work-state-and-delivery",
+    "commit-policy": "work-state-and-delivery"
+  },
   "roles": {
     "entrypoint": {
       "description": "First-read guidance that routes an agent to source-of-truth documents, edit boundaries, and minimum validation.",

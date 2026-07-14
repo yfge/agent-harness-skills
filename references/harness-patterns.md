@@ -42,7 +42,13 @@ These names are lightweight repo-local defaults, not required forms. If a projec
 
 Use `references/harness-profiles.json` to choose the minimum useful role set for a repository archetype. A small library or docs-only repository should not inherit runtime-evidence or heavy quality governance by default. A service or high-audit repository may need stronger runtime evidence or ledger roles.
 
+Use its `skillRouting` map to load the owner of a required role. Several roles may intentionally share one skill; do not recreate one skill per artifact or keyword.
+
 Use `templates/` only after mapping existing equivalents. Templates are starting points for missing roles, not a prescribed repository shape.
+
+## Standalone Skill Rule
+
+Keep guidance as a standalone skill only when it adds a stable schema, executable or mechanically checkable procedure, repository or organization context, a high-risk guardrail, or measured improvement in `docs/model-evaluation.md`. Put generic model knowledge and routine execution rules in shared references, templates, or the target repository entrypoint.
 
 ## Task And Commit Coupling
 
@@ -76,4 +82,5 @@ If a skill asks an agent to search for a harness surface and that surface is abs
 - Start with the smallest useful slice.
 - Freeze new drift before paying down historical debt.
 - Prefer a clear script over a platform until the script stops being enough.
+- Prefer a shared reference over another skill when multiple capabilities use the same mechanism.
 - Keep private URLs, credentials, account names, and environment assumptions out of reusable skills.

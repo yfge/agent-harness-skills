@@ -2,6 +2,13 @@
 
 Record realistic prompt tests for substantial skill wording changes. Keep entries repo-neutral, concise, and free of private URLs, credentials, secrets, or environment assumptions.
 
+## 2026-07-15 - Frontier Model Skill Consolidation
+
+- Prompt: "With frontier coding models available, reduce this suite to the skills that still add mechanical or repository-specific value."
+- Skills under review: the previous 9-skill suite, shared references, profile routing, templates, and validation scripts.
+- Observed output: Keep four core skills for assessment and entrypoints, contracts and structural quality, validation, and runtime evidence; merge design, work state, ledger, artifact, and commit-policy guidance into one optional governance skill; do not trigger a skill for ordinary commits with existing repository rules.
+- Follow-up: Add machine-readable `skillRouting` consistency checks, preserve removed skills' unique guardrails in the owning skill references, and use `docs/model-evaluation.md` before claiming cross-model quality improvement.
+
 ## 2026-05-28 - Planning Review Routing
 
 - Prompt: "检查这个项目的 skills 的规划是否合理"

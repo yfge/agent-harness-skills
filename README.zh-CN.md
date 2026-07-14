@@ -45,21 +45,21 @@ Agent Harness Skills 的目标不是增加仪式感，而是把这些关键约�
 
 ## 包含的 Skills
 
-这些 skills 组成了一张 agent-ready repository 的能力图：
+套件主动保持精简：4 个核心 skill，加 1 个按需使用的治理 skill。
 
-- `repo-harness-assessment`：评估仓库当前 agent/harness 成熟度，找出最小补强路径。
-- `agent-entrypoint-design`：设计 `AGENTS.md`、镜像文件、指令优先级和事实源入口。
-- `repo-contracts-and-boundaries`：把架构边界、目录边界、choke point、baseline/allowlist 变成机械检查。
+- `repo-harness-assessment`：评估仓库 agent/harness 成熟度，统一 agent 入口，映射现有角色并找出最小补强路径。
+- `repo-contracts-and-boundaries`：把架构、schema、结构质量、baseline/allowlist 变成机械检查和渐进债务收敛。
 - `validation-harness-design`：设计验证入口、test matrix、JSON/JUnit 输出和 CI 门禁。
 - `runtime-evidence-and-tracing`：设计 run id、request id、artifact bundle、运行 trace 和故障证据闭环。
-- `agent-ledger-and-delivery`：设计协作 ledger、交付证据汇总，以及 task、commit、review 之间的链接。
-- `quality-gardening`：设计质量快照、结构指标、红线、债务收敛和质量报告。
-- `design-doc-and-task-board`：抽象设计文档、`tasks.md` 这类工作状态承载面、exec plan、状态同步、验收规则和 task-to-change traceability。
-- `atomic-commit-discipline`：抽象最小提交、相关任务状态同步、提交前检查、提交信息、关联记录和禁止混入无关改动。
+- `work-state-and-delivery`：按需协调设计文档、工作状态、exec plan、交付记录、验收标准、artifact 和仓库级 commit coupling 策略。
+
+普通提交执行这类通用模型知识不再保留为独立 skill，而应进入目标仓库的入口文件或贡献规范。一个独立 skill 必须至少提供稳定 schema、机械流程、仓库上下文、高风险 guardrail 或可测量的评测收益。
+
+对 `0.1.x` 用户：`agent-entrypoint-design` 已并入 `repo-harness-assessment`，`quality-gardening` 已并入 `repo-contracts-and-boundaries`，设计/任务、ledger/交付和仓库 commit policy 已合并为 `work-state-and-delivery`。
 
 共享方法论支持：
 
-- `references/harness-profiles.json`：machine-readable repository archetypes 和 role mapping，覆盖 library、service、monorepo、CLI/tooling、docs-only、regulated/high-audit repository。
+- `references/harness-profiles.json`：machine-readable repository archetypes、role mapping 和 role-to-skill routing，覆盖 library、service、monorepo、CLI/tooling、docs-only、regulated/high-audit repository。
 - `templates/`：中立 starter templates，覆盖 entrypoint、validation matrix、delivery record、work-state surface、runtime evidence summary 和 quality report。
 - `Detected Mapping`：每个 skill 输出都应先列出当前仓库已有的等价 artifact，再推荐新增文件。
 
@@ -182,7 +182,7 @@ use skill tool to load repo-harness-assessment
 - “给一个新项目设计 `AGENTS.md` 和验证入口”
 - “把可观察行为和 request id 串起来”
 - “这个需求应该写到 `tasks.md` 这类工作状态承载面，还是 design doc”
-- “帮我把这批改动拆成原子提交”
+- “定义这个仓库的 task 更新、delivery artifact 和 commit coupling 规则”
 
 ## Repository Layout
 
@@ -201,6 +201,7 @@ gemini-extension.json
 skills/
   <skill-name>/SKILL.md
 docs/
+  model-evaluation.md
   README.opencode.md
   scenario-tests.md
 references/

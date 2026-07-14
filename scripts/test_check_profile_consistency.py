@@ -32,6 +32,24 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+SKILL_ROUTING = {
+    "assessment": "repo-harness-assessment",
+    "entrypoint": "repo-harness-assessment",
+    "contracts": "repo-contracts-and-boundaries",
+    "quality": "repo-contracts-and-boundaries",
+    "validation": "validation-harness-design",
+    "runtime-evidence": "runtime-evidence-and-tracing",
+    "work-state": "work-state-and-delivery",
+    "ledger": "work-state-and-delivery",
+    "commit-policy": "work-state-and-delivery",
+}
+
+
+def write_skill_stubs(root: Path) -> None:
+    for skill_name in set(SKILL_ROUTING.values()):
+        write_text(root / "skills" / skill_name / "SKILL.md", "# Test skill\n")
+
+
 def valid_profile() -> dict:
     roles = {
         "entrypoint": {
@@ -118,6 +136,7 @@ def valid_profile() -> dict:
     return {
         "version": 1,
         "templateDirectory": "templates",
+        "skillRouting": dict(SKILL_ROUTING),
         "roles": roles,
         "archetypes": archetypes,
         "engineeringForms": ["library", "service", "monorepo", "backend", "frontend"],
@@ -129,6 +148,7 @@ class CheckProfileConsistencyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_json(root / "references" / "harness-profiles.json", valid_profile())
+            write_skill_stubs(root)
             for template, role_id in (
                 ("AGENTS.md", "entrypoint"),
                 ("runtime-evidence-summary.md", "runtime-evidence"),
@@ -150,6 +170,7 @@ class CheckProfileConsistencyTest(unittest.TestCase):
             profile = valid_profile()
             profile["archetypes"][0]["minimumRoles"].append("unknown-role")
             write_json(root / "references" / "harness-profiles.json", profile)
+            write_skill_stubs(root)
             write_text(root / "templates" / "AGENTS.md", "Harness role: entrypoint\n")
 
             issues = checker.check_repository(root)
@@ -160,6 +181,7 @@ class CheckProfileConsistencyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_json(root / "references" / "harness-profiles.json", valid_profile())
+            write_skill_stubs(root)
 
             issues = checker.check_repository(root)
 
@@ -171,12 +193,43 @@ class CheckProfileConsistencyTest(unittest.TestCase):
             profile = valid_profile()
             profile["archetypes"][0]["minimumRoles"].append("runtime-evidence")
             write_json(root / "references" / "harness-profiles.json", profile)
+            write_skill_stubs(root)
             write_text(root / "templates" / "AGENTS.md", "Harness role: entrypoint\n")
 
             issues = checker.check_repository(root)
 
             self.assertTrue(
                 any("cannot require and avoid role by default" in issue.message for issue in issues),
+                issues,
+            )
+
+    def test_missing_required_skill_route_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            profile = valid_profile()
+            del profile["skillRouting"]["quality"]
+            write_json(root / "references" / "harness-profiles.json", profile)
+            write_skill_stubs(root)
+
+            issues = checker.check_repository(root)
+
+            self.assertTrue(
+                any("missing required route: quality" in issue.message for issue in issues),
+                issues,
+            )
+
+    def test_route_to_missing_skill_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            profile = valid_profile()
+            profile["skillRouting"]["quality"] = "removed-quality-skill"
+            write_json(root / "references" / "harness-profiles.json", profile)
+            write_skill_stubs(root)
+
+            issues = checker.check_repository(root)
+
+            self.assertTrue(
+                any("references missing skill: removed-quality-skill" in issue.message for issue in issues),
                 issues,
             )
 

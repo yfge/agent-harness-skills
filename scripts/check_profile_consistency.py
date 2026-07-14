@@ -19,6 +19,17 @@ REQUIRED_ARCHETYPES = {
     "docs-only",
     "regulated-high-audit",
 }
+REQUIRED_SKILL_ROUTES = {
+    "assessment",
+    "entrypoint",
+    "contracts",
+    "quality",
+    "validation",
+    "runtime-evidence",
+    "work-state",
+    "ledger",
+    "commit-policy",
+}
 
 
 @dataclass(frozen=True)
@@ -100,12 +111,61 @@ def _validate_template(
         issues.append(ProfileIssue(resolved, f"template must include `{role_marker}`"))
 
 
+def _validate_skill_routing(
+    root: Path,
+    profile: dict[str, Any],
+    profile_path: Path,
+    issues: list[ProfileIssue],
+) -> None:
+    routing = profile.get("skillRouting")
+    if not isinstance(routing, dict) or not routing:
+        issues.append(ProfileIssue(profile_path, "skillRouting must be a non-empty object"))
+        return
+
+    missing_routes = sorted(REQUIRED_SKILL_ROUTES - set(routing))
+    for route in missing_routes:
+        issues.append(ProfileIssue(profile_path, f"skillRouting missing required route: {route}"))
+
+    skills_root = root / "skills"
+    available_skills = {
+        path.name
+        for path in skills_root.iterdir()
+        if path.is_dir() and (path / "SKILL.md").is_file()
+    } if skills_root.is_dir() else set()
+    referenced_skills: set[str] = set()
+
+    for route, skill_name in routing.items():
+        if not isinstance(route, str) or not route.strip():
+            issues.append(ProfileIssue(profile_path, "skillRouting keys must be non-empty strings"))
+            continue
+        if not isinstance(skill_name, str) or not skill_name.strip():
+            issues.append(
+                ProfileIssue(profile_path, f"skillRouting.{route} must name a skill")
+            )
+            continue
+        referenced_skills.add(skill_name)
+        if skill_name not in available_skills:
+            issues.append(
+                ProfileIssue(
+                    profile_path,
+                    f"skillRouting.{route} references missing skill: {skill_name}",
+                )
+            )
+
+    for skill_name in sorted(available_skills - referenced_skills):
+        issues.append(
+            ProfileIssue(profile_path, f"skill has no routing entry: {skill_name}")
+        )
+
+
 def check_repository(root: Path) -> list[ProfileIssue]:
     root = root.resolve()
     profile_path = root / PROFILE_PATH
     profile, issues = load_json_object(profile_path)
     if profile is None:
         return issues
+
+    _validate_skill_routing(root, profile, profile_path, issues)
 
     roles = profile.get("roles")
     if not isinstance(roles, dict) or not roles:
