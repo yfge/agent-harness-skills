@@ -28,6 +28,7 @@ python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
 python3 scripts/check_profile_consistency.py
 python3 scripts/validate_plugin_metadata.py
+python3 scripts/check_plugin_package.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
 

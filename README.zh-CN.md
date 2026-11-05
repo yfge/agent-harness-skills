@@ -115,6 +115,8 @@ Agent Harness Skills 的目标不是增加仪式感，而是把这些关键约�
 - `.codex-plugin/plugin.json` 是 Codex plugin 的事实源：`skills` 必须指向 `./skills/`；除非存在对应 manifest，否则不要声明 `apps` 或 `mcpServers`；版本信息要和其他 extension manifest 保持一致。
 - 通过 marketplace 发布时，在 release commit 之后更新 marketplace entry，确保它的 source、ref 或 sha 指向已发布版本。
 - packaging 改动用 `python3 scripts/validate_plugin_metadata.py` 校验。
+- 发布时保留完整插件根目录，包括 `references/`、`templates/`、`scripts/` 以及其他运行时的清单和入口文件。只复制 `skills/` 和 Codex 清单会导致共享引用及包内命令失效。
+- 发布镜像或安装副本前，先运行 `python3 scripts/check_plugin_package.py <plugin-root> --source <source-checkout>`，再运行 `npm --prefix <plugin-root> run validate`。CI 会对 Git 归档的解包目录执行这两项检查，并上传名为 `agent-harness-skills-plugin` 的已验证归档。
 - 验证方式：让 Codex 使用 `repo-harness-assessment` 评估一个仓库。
 
 ### Claude Code
@@ -233,6 +235,7 @@ python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
 python3 scripts/check_profile_consistency.py
 python3 scripts/validate_plugin_metadata.py
+python3 scripts/check_plugin_package.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
 
