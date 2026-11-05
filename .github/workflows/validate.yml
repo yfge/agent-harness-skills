@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Run validator tests
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
@@ -44,3 +49,21 @@ jobs:
 
       - name: Check OpenCode plugin entrypoint
         run: node --check .opencode/plugins/agent-harness-skills.js
+
+      - name: Build plugin archive
+        run: |
+          mkdir -p dist/plugin
+          git archive --format=zip --output=dist/agent-harness-skills.zip HEAD
+          python3 -m zipfile -e dist/agent-harness-skills.zip dist/plugin
+
+      - name: Validate unpacked plugin contents
+        run: python3 scripts/check_plugin_package.py dist/plugin --source .
+
+      - name: Run advertised validation from unpacked plugin
+        run: npm --prefix dist/plugin run validate
+
+      - name: Upload validated plugin archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-harness-skills-plugin
+          path: dist/agent-harness-skills.zip

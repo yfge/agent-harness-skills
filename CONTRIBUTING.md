@@ -48,6 +48,7 @@ python3 scripts/check_skill_closure.py
 python3 scripts/check_reference_neutrality.py
 python3 scripts/check_profile_consistency.py
 python3 scripts/validate_plugin_metadata.py
+python3 scripts/check_plugin_package.py
 node --check .opencode/plugins/agent-harness-skills.js
 ```
 
@@ -60,6 +61,8 @@ node --check .opencode/plugins/agent-harness-skills.js
 ```
 
 For substantial skill wording or workflow changes, test at least one realistic prompt and record the observed output in `docs/scenario-tests.md` or the PR notes.
+
+For packaging changes, also validate an extracted or installed plugin with `python3 scripts/check_plugin_package.py <plugin-root> --source <source-checkout>` and run `npm --prefix <plugin-root> run validate`. Preserve the full plugin root when mirroring it; the skills share root-level references and templates, and package commands require the scripts and runtime entrypoints. CI uploads a complete Git archive only after validating its extracted contents.
 
 ## Pull Request Expectations
 
